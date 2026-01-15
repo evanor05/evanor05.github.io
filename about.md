@@ -4,24 +4,26 @@ title: About
 permalink: /about/
 ---
 
-### 👋 Hi, 我是 David Lee
+# David Lee
 
-我现在是 **无锡学院 (Wuxi University)** 的一名大二学生，主修 **轨道交通与信号控制** 专业。
-
-### 🛠️ 正在折腾的技术
-我的技能树主要点在了**嵌入式与控制**领域：
-*   **核心方向**: 嵌入式开发 (Embedded System) / 单片机 (MCU)
-*   **进阶探索**: 机器学习 (Machine Learning) / 自动控制算法
-*   **学习格言**: "Talk is cheap, show me the code (and the circuit)."
-
-### 🎯 年度挑战 (2026)
-除了修满学分，今年给自己定了一个挑战：
-*   💪 **完成 10,000 个俯卧撑**
-    *   *(目前的进度：正在努力中...90/10000)*
-
+**无锡学院** (Wuxi University) / 轨道交通与信号控制 / 大二在读
 
 ---
 
-### 📬 联系我
-*   **Email**: [daweili05@outlook.com](mailto:daweili05@outlook.com)
+### 💻 Focus
+
+*   **Embedded**: 单片机 (MCU), 嵌入式 C, 51单片机
+*   **Control**: 自动控制原理, PID 算法
+*   **Learning**: Machine Learning, Python, 信号与系统, 数据结构与算法
+
+> "Talk is cheap, show me the code (and the circuit)."
+
+### 🚩 2026 Challenge
+
+*   **Fitness**: 10,000 Push-ups
+    *   Status: `90 / 10000`
+
+### 📬 Contact
+
 *   **GitHub**: [evanor05](https://github.com/evanor05)
+*   **Email**: [daweili05@outlook.com](mailto:daweili05@outlook.com)
