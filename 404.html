@@ -1,24 +1,61 @@
 ---
 layout: default
+permalink: /404.html
 ---
 
 <style type="text/css" media="screen">
   .container {
-    margin: 10px auto;
+    margin: 50px auto;
     max-width: 600px;
     text-align: center;
+    font-family: "Courier New", Courier, monospace; /* 代码风格字体 */
   }
   h1 {
     margin: 30px 0;
-    font-size: 4em;
+    font-size: 5em;
     line-height: 1;
     letter-spacing: -1px;
+    color: #333;
+  }
+  .error-code {
+    font-size: 1.2em;
+    color: #888;
+    margin-bottom: 20px;
+  }
+  .quote {
+    font-style: italic;
+    color: #555;
+    margin: 30px 0;
+    line-height: 1.8;
+  }
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid #333;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s;
+    border-radius: 4px;
+    margin-top: 20px;
+  }
+  .btn:hover {
+    background: #333;
+    color: #fff;
   }
 </style>
 
 <div class="container">
   <h1>404</h1>
+  
+  <p class="error-code">Error: Signal Lost / Pointer is NULL</p>
 
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
+  <div class="quote">
+    <p>这个页面似乎不存在。</p>
+    <p>也许是代码写错了，也许只是...</p>
+    <h3>「命里逢空格」</h3>
+  </div>
+
+  <p>雨季不再来，但你可以回到原点。</p>
+
+  <a href="/" class="btn">Return 0; (回到首页)</a>
 </div>
