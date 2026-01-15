@@ -8,7 +8,7 @@ description: 记录学习、技术与生活。
 author: David Lee
 
 # 头像路径（记得找张图片命名为 logo.png 放在根目录）
-avatar: /logo.png
+avatar: /IMG_4950.png
 
 # 你的邮箱
 email: daweili05@outlook.com
@@ -51,8 +51,5 @@ social:
     - https://github.com/evanor05
     # 如果以后有其他链接，可以按格式加在下面
     # - https://www.zhihu.com/people/你的ID
-
-# 原作者的谷歌验证码我已经删掉了，避免冲突
-
 # 语言设置为简体中文
 lang: zh-CN
