@@ -7,7 +7,7 @@ permalink: /about/
 # David Lee
 
 **无锡学院** (Wuxi University) / 轨道交通与信号控制 / 大二在读
-
+不怕笨鸟先飞,就怕一知半解.
 ---
 
 ### 💻 Focus
