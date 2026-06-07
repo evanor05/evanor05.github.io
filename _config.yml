@@ -26,6 +26,9 @@ plugins:
 # 每页显示多少篇文章
 paginate: 10
 
+# 文章链接不依赖分类，避免以后调整分类导致 URL 改变
+permalink: /:year/:month/:day/:title/
+
 # 日期格式
 date_format: "%Y-%m-%d"
 
