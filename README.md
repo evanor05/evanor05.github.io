@@ -17,8 +17,8 @@ Front Matter 示例：
 layout: post
 title: "文章标题"
 date: 2026-06-07 20:00:00 +0800
-categories: [Life]
-tags: [随笔]
+categories: [随笔]
+tags: [生活]
 ---
 ```
 
