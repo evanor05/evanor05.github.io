@@ -40,7 +40,8 @@ layout: default
           {%- endif -%}
         </p>
         {%- if post.show_excerpts != false -%}
-          <div class="post-excerpt">{{ post.excerpt | strip_html }}</div>
+          {%- assign excerpt_text = post.description | default: post.excerpt | strip_html | strip -%}
+          <div class="post-excerpt">{{ excerpt_text | truncate: 140 }}</div>
         {%- endif -%}
       </li>
       {%- endfor -%}
