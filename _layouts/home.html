@@ -4,7 +4,7 @@ layout: default
 
 <div class="home">
 
-  {{ content }}
+  {{ content | markdownify }}
 
   {% if site.paginate %}
     {% assign posts = paginator.posts %}
