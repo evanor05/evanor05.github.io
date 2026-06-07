@@ -45,7 +45,6 @@ exclude:
   - screenshot.png
   - screenshot-sunrise.png
   - screenshot-midnight.png
-  - jekyll-theme-hamilton.gemspec
 
 # SEO 设置
 # =========================
