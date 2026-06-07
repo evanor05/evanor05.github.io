@@ -19,6 +19,7 @@ title: "文章标题"
 date: 2026-06-07 20:00:00 +0800
 categories: [随笔]
 tags: [生活]
+description: "一句话说明这篇文章主要写什么。"
 ---
 ```
 
@@ -77,7 +78,8 @@ _posts/2026-06-07-clean-c-drive.md
 发布文章前至少检查这些点：
 
 - 文件名是否是 `YYYY-MM-DD-title.md`
-- Front Matter 是否包含 `layout`、`title`、`date`、`categories`、`tags`
+- Front Matter 是否包含 `layout`、`title`、`date`、`categories`、`tags`、`description`
+- `description` 是否能在 140 字内说明文章重点
 - 分类是否只使用 `随笔`、`学习`、`生活` 中的一个或多个
 - 标签是否具体，避免只写很宽泛的词
 - 文章开头是否能让读者知道这篇文章解决什么问题

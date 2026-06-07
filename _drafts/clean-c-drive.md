@@ -4,6 +4,7 @@ title: "清理 C 盘可以从哪里开始"
 date: 2026-06-07 20:00:00 +0800
 categories: [学习]
 tags: [教程, Windows, C盘清理]
+description: "从低风险步骤开始清理 Windows C 盘，并说明哪些目录不建议直接删除。"
 ---
 
 电脑用久了之后，C 盘变红基本是迟早的事。
