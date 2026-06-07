@@ -7,10 +7,19 @@
 导入仓库后使用以下配置：
 
 - Framework Preset: Other
+- Install Command: `bundle install`
 - Build Command: `bundle exec jekyll build`
 - Output Directory: `_site`
 
 仓库根目录已经提供 `vercel.json`，正常情况下 Vercel 会直接读取这些配置。
+
+如果 Vercel 构建时报 Bundler 平台相关错误，在本地安装 Ruby/Bundler 后执行：
+
+```bash
+bundle lock --add-platform x86_64-linux
+```
+
+然后提交生成的 `Gemfile.lock`。
 
 ## GitHub Pages
 

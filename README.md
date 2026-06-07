@@ -28,6 +28,7 @@ tags: [随笔]
 
 ```bash
 bundle install
+bundle lock --add-platform x86_64-linux
 bundle exec jekyll serve
 ```
 

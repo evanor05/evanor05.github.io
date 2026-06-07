@@ -37,6 +37,14 @@ date_format: "%Y-%m-%d"
 exclude:
   - scripts/
   - README.md
+  - DEPLOY.md
+  - LICENSE.txt
+  - push.bat
+  - vercel.json
+  - IMG_4950.png
+  - screenshot.png
+  - screenshot-sunrise.png
+  - screenshot-midnight.png
   - jekyll-theme-hamilton.gemspec
 
 # SEO 设置
@@ -56,6 +64,9 @@ social:
     # - https://www.zhihu.com/people/你的ID
 # 语言设置为简体中文
 lang: zh-CN
+
+# 时区
+timezone: Asia/Shanghai
 
 # 固定主题皮肤，减少首屏额外 CSS 请求；可选 daylight/sunrise/sunset/midnight
 skin: daylight
