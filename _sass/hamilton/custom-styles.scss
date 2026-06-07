@@ -1,1 +1,59 @@
-// Placeholder to allow customizing styles.
+// Local icon fallbacks for the small set of Font Awesome classes used by this
+// theme. This avoids a blocking request to use.fontawesome.com.
+.fas,
+.far,
+.fab {
+  display: inline-block;
+  min-width: 1em;
+  text-align: center;
+  font-style: normal;
+  line-height: 1;
+}
+
+.fa-2x {
+  font-size: 1.6em;
+}
+
+.fa-at::before {
+  content: "@";
+}
+
+.fa-envelope::before {
+  content: "\2709";
+}
+
+.fa-location-arrow::before {
+  content: "\2197";
+}
+
+.fa-rss::before {
+  content: "RSS";
+  font-size: 0.75em;
+  font-weight: 700;
+}
+
+.fa-github::before {
+  content: "GH";
+  font-size: 0.75em;
+  font-weight: 700;
+}
+
+.fa-folder::before {
+  content: "\25A3";
+}
+
+.fa-tags::before {
+  content: "#";
+}
+
+.fa-arrow-left::before {
+  content: "\2190";
+}
+
+.fa-arrow-right::before {
+  content: "\2192";
+}
+
+.fa-user::before {
+  content: "\25EF";
+}

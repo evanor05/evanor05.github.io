@@ -7,13 +7,13 @@ description: 记录学习、技术与生活。
 # 你的名字
 author: David Lee
 
-# 头像路径（记得找张图片命名为 logo.png 放在根目录）
-avatar: /IMG_4950.png
+# 头像路径
+avatar: /assets/images/avatar.png
 
 # 你的邮箱
 email: daweili05@outlook.com
 
-# 你的博客网址（GitHub Pages 自动生成的那个）
+# 你的博客网址；部署到 Vercel 或自定义域名后再改成正式地址
 url: "https://evanor05.github.io"
 
 # 插件列表（保持默认即可）
@@ -25,6 +25,9 @@ plugins:
 
 # 每页显示多少篇文章
 paginate: 10
+
+# 日期格式
+date_format: "%Y-%m-%d"
 
 # 统计和评论功能（暂时留空，想用的时候再填）
 # google_analytics: 
@@ -42,7 +45,7 @@ twitter:
   username:  # 这里留空，除非你有Twitter账号，可以填在冒号后面
   card: summary
 
-logo: logo.png
+logo: /assets/images/avatar.png
 
 social:
   name: David Lee
@@ -53,3 +56,6 @@ social:
     # - https://www.zhihu.com/people/你的ID
 # 语言设置为简体中文
 lang: zh-CN
+
+# 固定主题皮肤，减少首屏额外 CSS 请求；可选 daylight/sunrise/sunset/midnight
+skin: daylight

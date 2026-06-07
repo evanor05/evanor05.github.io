@@ -1,1 +1,7 @@
-// Placeholder to allow overriding predefined variables.
+// Prefer system fonts so the site remains fast and readable in mainland China
+// without depending on Google Fonts.
+$base-font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+$reading-font-family: Georgia, "Times New Roman", "Noto Serif SC", "Songti SC", SimSun, serif;
+$headline-font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+$code-font-family: Consolas, "Liberation Mono", Menlo, monospace;
+$handwriting-font-family: $headline-font-family;

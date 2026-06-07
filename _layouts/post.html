@@ -58,7 +58,7 @@ layout: default
           {% for tag in tags %}
             <li class="post-tag">
               {% assign slugified_tag = tag | slugify %}
-              <a href="{{ '/tags/#:tag' | replace: ':tag', slugified_tag | relative_url }}">{{ slugified_tag }}</a>
+              <a href="{{ '/tags/#:tag' | replace: ':tag', slugified_tag | relative_url }}">{{ tag }}</a>
             </li>
           {% endfor %}
         </ul>
