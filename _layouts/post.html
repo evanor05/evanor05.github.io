@@ -68,7 +68,7 @@ layout: default
     <nav class="post-pagination" role="navigation">
       {% if page.previous %}
         <a class="post-previous" href="{{ page.previous.url | relative_url }}">
-          <h4 class="post-pagination-label">Prev</h4>
+          <h4 class="post-pagination-label">上一篇</h4>
           <span class="post-pagination-title">
             <i class="fas fa-arrow-left"></i> {{ page.previous.title | markdownify | strip_html }}
           </span>
@@ -77,7 +77,7 @@ layout: default
 
       {% if page.next %}
         <a class="post-next" href="{{ page.next.url | relative_url }}">
-          <h4 class="post-pagination-label">Next</h4>
+          <h4 class="post-pagination-label">下一篇</h4>
           <span class="post-pagination-title">
             {{ page.next.title | markdownify | strip_html }} <i class="fas fa-arrow-right"></i>
           </span>
