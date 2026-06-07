@@ -1,8 +1,8 @@
 # 网站标题（显示在浏览器标签页）
-title: David Lee
+title: 去哪儿呢
 
 # 网站描述（搜索引擎会抓取这句）
-description: 记录学习、技术与生活。
+description: 记录学习、技术、阅读与生活。
 
 # 你的名字
 author: David Lee
@@ -56,7 +56,7 @@ twitter:
 logo: /assets/images/avatar.png
 
 social:
-  name: David Lee
+  name: 去哪儿呢
   links:
     # 这里只留了你的 GitHub，原来的 facebook/twitter 都删了
     - https://github.com/evanor05

@@ -27,7 +27,7 @@ layout: page
     {%- for i in (1..max_count) reversed -%}
       {%- for taxonomy in taxonomies -%}
         {%- assign taxonomy_name = taxonomy[0] -%}
-        {%- assign slugified_taxonomy_name = taxonomy_name | slugify -%}
+        {%- assign slugified_taxonomy_name = taxonomy_name | slugify: "raw" -%}
         {%- assign posts = taxonomy[1] -%}
         {%- if posts.size == i -%}
           <li>
@@ -49,7 +49,7 @@ layout: page
 {%- for i in (1..max_count) reversed -%}
   {%- for taxonomy in taxonomies -%}
     {%- assign taxonomy_name = taxonomy[0] -%}
-    {%- assign slugified_taxonomy_name = taxonomy_name | slugify -%}
+    {%- assign slugified_taxonomy_name = taxonomy_name | slugify: "raw" -%}
     {%- assign posts = taxonomy[1] -%}
     {%- if posts.size == i -%}
       <h2 id="{{ slugified_taxonomy_name }}">
