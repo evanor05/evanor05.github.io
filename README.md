@@ -39,6 +39,37 @@ tags: [生活]
 
 使用时复制模板到 `_posts/`，改成正式文件名和日期。
 
+当前草稿：
+
+- `_drafts/clean-c-drive.md`: 清理 C 盘教程草稿
+
+## 草稿预览
+
+Jekyll 默认不会发布 `_drafts/` 里的文章。需要预览草稿时使用：
+
+```bash
+bundle exec jekyll serve --drafts
+```
+
+草稿预览时，Jekyll 会把草稿当作当天的文章显示。
+
+## 从草稿发布
+
+发布草稿时按这个流程：
+
+1. 从 `_drafts/` 复制到 `_posts/`。
+2. 文件名改成 `YYYY-MM-DD-title.md`。
+3. Front Matter 里的 `date` 改成正式发布日期。
+4. 检查分类和标签。
+5. 本地预览无误后再提交。
+
+例如：
+
+```text
+_drafts/clean-c-drive.md
+_posts/2026-06-07-clean-c-drive.md
+```
+
 ## 发布前检查
 
 发布文章前至少检查这些点：
