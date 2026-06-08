@@ -2,50 +2,10 @@
 layout: default
 title: 页面不存在
 permalink: /404.html
+robots: noindex
 ---
 
-<style type="text/css" media="screen">
-  .container {
-    margin: 50px auto;
-    max-width: 600px;
-    text-align: center;
-    font-family: "Courier New", Courier, monospace; /* 代码风格字体 */
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 5em;
-    line-height: 1;
-    letter-spacing: -1px;
-    color: #333;
-  }
-  .error-code {
-    font-size: 1.2em;
-    color: #888;
-    margin-bottom: 20px;
-  }
-  .quote {
-    font-style: italic;
-    color: #555;
-    margin: 30px 0;
-    line-height: 1.8;
-  }
-  .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    border: 1px solid #333;
-    color: #333;
-    text-decoration: none;
-    transition: all 0.3s;
-    border-radius: 4px;
-    margin-top: 20px;
-  }
-  .btn:hover {
-    background: #333;
-    color: #fff;
-  }
-</style>
-
-<div class="container">
+<div class="not-found">
   <h1>404</h1>
   
   <p class="error-code">信号丢失 / 指针为空</p>
@@ -53,10 +13,10 @@ permalink: /404.html
   <div class="quote">
     <p>这个页面似乎不存在。</p>
     <p>也许是代码写错了，也许只是...</p>
-    <h3>「命里逢空格」</h3>
+    <p class="quote-line">「命里逢空格」</p>
   </div>
 
   <p>雨季不再来，但你可以回到原点。</p>
 
-  <a href="{{ '/' | relative_url }}" class="btn">回到首页</a>
+  <a href="{{ '/' | relative_url }}" class="not-found-link">回到首页</a>
 </div>
