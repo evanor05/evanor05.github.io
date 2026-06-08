@@ -58,6 +58,14 @@
   content: "\25EF";
 }
 
+.site-sidebar-button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
 .post-description {
   max-width: 42rem;
   margin: 0.75rem auto 0;

@@ -26,7 +26,7 @@
     {% if site.location -%}
       <li>
         <i class="sidebar-icon fas fa-location-arrow"></i>
-        <a class="contact-info u-location" href="https://www.google.com/maps/search/{{ site.location }}">{{ site.location }}</a>
+        <a class="contact-info u-location" href="https://www.google.com/maps/search/{{ site.location | url_encode }}" target="_blank" rel="noopener noreferrer">{{ site.location }}</a>
       </li>
     {%- endif %}
   </ul>
@@ -45,7 +45,9 @@
     <ul class="social-icons">
       {% for social in site.data.social -%}
         <li>
-          <a class="social-icon" href="{{ social.url }}"><i class="{{ social.icon | default: 'fas fa-link' }} fa-2x" title="{{ social.title }}"></i></a>
+          <a class="social-icon" href="{{ social.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ social.title | escape }}">
+            <i class="{{ social.icon | default: 'fas fa-link' }} fa-2x" title="{{ social.title | escape }}"></i>
+          </a>
         </li>
       {%- endfor %}
     </ul>

@@ -1,22 +1,22 @@
 <div class="wrapper">
   <script>
     function clickSidebarButton() {
-      const elem = document.getElementById("site-sidebar")
+      const elem = document.getElementById("site-sidebar");
+      const button = document.querySelector(".site-sidebar-button");
       if (elem.style.display == "none" || elem.style.display == "") {
         elem.style.display = "block";
+        button.setAttribute("aria-expanded", "true");
+        button.setAttribute("aria-label", "关闭侧边栏");
       } else {
         elem.style.display = "none";
+        button.setAttribute("aria-expanded", "false");
+        button.setAttribute("aria-label", "打开侧边栏");
       }
     }
   </script>
-  <a class="site-sidebar-button" onclick="clickSidebarButton()">
-    {%- if site.avatar contains "://" -%}
-      {%- assign avatar = site.avatar -%}
-    {%- else -%}
-      {%- assign avatar = site.avatar | relative_url -%}
-    {%- endif -%}
+  <button class="site-sidebar-button" type="button" onclick="clickSidebarButton()" aria-controls="site-sidebar" aria-expanded="false" aria-label="打开侧边栏">
     <i class="far fa-user"></i>
-  </a>
+  </button>
 
   <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
 
