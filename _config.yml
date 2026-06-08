@@ -1,5 +1,5 @@
 # 网站标题（显示在浏览器标签页）
-title: 去哪儿呢
+title: 先记下来
 
 # 网站描述（搜索引擎会抓取这句）
 description: 写随笔，也写一些平时用得上的教程和学习笔记。
@@ -58,7 +58,7 @@ twitter:
 logo: /assets/images/avatar.png
 
 social:
-  name: 去哪儿呢
+  name: 先记下来
   links:
     # 这里只留了你的 GitHub，原来的 facebook/twitter 都删了
     - https://github.com/evanor05
