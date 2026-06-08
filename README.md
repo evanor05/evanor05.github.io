@@ -42,6 +42,16 @@ description: "一句话说明这篇文章主要写什么。"
 
 使用时复制模板到 `_posts/`，改成正式文件名和日期。
 
+也可以用脚本生成文章骨架：
+
+```powershell
+.\scripts\new-post.ps1 -Title "清理 C 盘可以从哪里开始" -Slug clean-c-drive -Category learning -Tags "教程,Windows,C盘清理" -Draft
+```
+
+去掉 `-Draft` 会直接生成到 `_posts/`，文件名自动带上当天日期。
+
+`-Category` 可以填 `essay`、`learning`、`life`，会分别生成 `随笔`、`学习`、`生活`。
+
 当前草稿：
 
 - `_drafts/clean-c-drive.md`: 清理 C 盘教程草稿
