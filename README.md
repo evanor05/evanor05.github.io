@@ -34,6 +34,18 @@
 bundle exec jekyll serve --drafts
 ```
 
+Windows 下也可以用：
+
+```powershell
+.\scripts\serve.ps1
+```
+
+默认会开启草稿预览；需要换端口时使用：
+
+```powershell
+.\scripts\serve.ps1 -Port 4001
+```
+
 ## 写文章
 
 文章放在 `_posts/` 目录，文件名格式：
