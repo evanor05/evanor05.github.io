@@ -1,6 +1,6 @@
 <div class="wrapper">
   <script>
-    function clickSidebarButton() {
+    function toggleSidebar() {
       const elem = document.getElementById("site-sidebar");
       const button = document.querySelector(".site-sidebar-button");
       if (elem.style.display == "none" || elem.style.display == "") {
@@ -13,8 +13,15 @@
         button.setAttribute("aria-label", "打开侧边栏");
       }
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const button = document.querySelector(".site-sidebar-button");
+      if (button) {
+        button.addEventListener("click", toggleSidebar);
+      }
+    });
   </script>
-  <button class="site-sidebar-button" type="button" onclick="clickSidebarButton()" aria-controls="site-sidebar" aria-expanded="false" aria-label="打开侧边栏">
+  <button class="site-sidebar-button" type="button" aria-controls="site-sidebar" aria-expanded="false" aria-label="打开侧边栏">
     <i class="far fa-user"></i>
   </button>
 
