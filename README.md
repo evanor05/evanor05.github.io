@@ -122,6 +122,18 @@ _posts/2026-06-07-clean-c-drive.md
 
 检查脚本会读取 `_data/categories.yml` 作为合法分类来源，并确认正式文章文件名日期和 Front Matter 里的 `date` 一致。
 
+如果想一次跑完发布前基础检查：
+
+```powershell
+.\scripts\check-all.ps1
+```
+
+如果本机已经安装 Ruby 和 Bundler，也可以顺手检查 Jekyll 构建：
+
+```powershell
+.\scripts\check-all.ps1 -Build
+```
+
 ## 本地构建
 
 需要先安装 Ruby 和 Bundler。
