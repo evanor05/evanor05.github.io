@@ -14,6 +14,9 @@ function Invoke-Step {
 
   Write-Output "==> $Name"
   & $Command
+  if ($LASTEXITCODE -ne 0) {
+    exit $LASTEXITCODE
+  }
 }
 
 Invoke-Step "Check post metadata" {

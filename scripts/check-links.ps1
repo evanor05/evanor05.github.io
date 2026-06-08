@@ -1,5 +1,5 @@
 param(
-  [string[]]$Paths = @("_posts", "_drafts", "README.md", "about.md")
+  [string[]]$Paths = @()
 )
 
 Set-StrictMode -Version Latest
@@ -44,17 +44,27 @@ function Remove-InlineCode {
 $issues = [System.Collections.Generic.List[object]]::new()
 $files = @()
 
-foreach ($path in $Paths) {
-  if (-not (Test-Path -LiteralPath $path)) {
-    continue
-  }
+if ($Paths.Count -gt 0) {
+  foreach ($path in $Paths) {
+    if (-not (Test-Path -LiteralPath $path)) {
+      continue
+    }
 
-  $item = Get-Item -LiteralPath $path
-  if ($item.PSIsContainer) {
-    $files += @(Get-ChildItem -LiteralPath $path -Filter "*.md" -File -Recurse)
-  } elseif ($item.Extension -eq ".md") {
-    $files += @($item)
+    $item = Get-Item -LiteralPath $path
+    if ($item.PSIsContainer) {
+      $files += @(Get-ChildItem -LiteralPath $path -Filter "*.md" -File -Recurse)
+    } elseif ($item.Extension -eq ".md") {
+      $files += @($item)
+    }
   }
+} else {
+  if (Test-Path "_posts") {
+    $files += @(Get-ChildItem -Path "_posts" -Filter "*.md" -File -Recurse)
+  }
+  if (Test-Path "_drafts") {
+    $files += @(Get-ChildItem -Path "_drafts" -Filter "*.md" -File -Recurse)
+  }
+  $files += @(Get-ChildItem -Path "." -Filter "*.md" -File)
 }
 
 $linkPattern = "!\[[^\]]*\]\(([^)\s]+)(?:\s+""[^""]*"")?\)|(?<!!)\[[^\]]+\]\(([^)\s]+)(?:\s+""[^""]*"")?\)"
