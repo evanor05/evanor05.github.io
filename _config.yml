@@ -8,7 +8,7 @@ description: 写随笔，也写一些平时用得上的教程和学习笔记。
 author: David Lee
 
 # 头像路径
-avatar: /assets/images/avatar.png
+avatar: /assets/images/avatar-240.png
 
 # 你的邮箱
 email: daweili05@outlook.com
@@ -55,7 +55,7 @@ twitter:
   username:  # 这里留空，除非你有Twitter账号，可以填在冒号后面
   card: summary
 
-logo: /assets/images/avatar.png
+logo: /assets/images/avatar-240.png
 
 social:
   name: 先记下来
