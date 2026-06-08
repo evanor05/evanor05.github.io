@@ -10,6 +10,9 @@ param(
 
   [string]$Description = "",
 
+  [ValidateSet("essay", "tutorial")]
+  [string]$Kind = "essay",
+
   [switch]$Draft
 )
 
@@ -85,9 +88,70 @@ $tagsLine = if ($tagList.Count -gt 0) {
 
 $dateText = $now.ToString("yyyy-MM-dd HH:mm:ss +0800")
 $intro = U "\u5148\u5199\u4e00\u53e5\u8fd9\u7bc7\u6587\u7ae0\u8981\u89e3\u51b3\u7684\u95ee\u9898\uff0c\u6216\u6700\u60f3\u8bb0\u5f55\u7684\u60f3\u6cd5\u3002"
-$cause = U "\u8d77\u56e0"
-$bodyTitle = U "\u6b63\u6587"
-$summary = U "\u603b\u7ed3"
+
+if ($Kind -eq "tutorial") {
+  $scene = U "\u9002\u7528\u573a\u666f"
+  $conclusion = U "\u5148\u8bf4\u7ed3\u8bba"
+  $preparation = U "\u51c6\u5907\u5de5\u4f5c"
+  $steps = U "\u64cd\u4f5c\u6b65\u9aa4"
+  $faq = U "\u5e38\u89c1\u95ee\u9898"
+  $summary = U "\u603b\u7ed3"
+  $preparationItem = U "\u9700\u8981\u7684\u5de5\u5177\u6216\u51c6\u5907\u4e8b\u9879"
+  $firstStep = U "\u7b2c\u4e00\u6b65"
+  $secondStep = U "\u7b2c\u4e8c\u6b65"
+  $firstQuestion = U "\u95ee\u9898\u4e00"
+  $bodyContent = @"
+$intro
+
+## $scene
+
+
+## $conclusion
+
+
+## $preparation
+
+- $preparationItem
+
+## $steps
+
+### 1. $firstStep
+
+
+### 2. $secondStep
+
+
+## $faq
+
+### $firstQuestion
+
+
+## $summary
+
+
+"@
+} else {
+  $cause = U "\u8d77\u56e0"
+  $bodyTitle = U "\u60f3\u5230\u7684\u4e1c\u897f"
+  $view = U "\u73b0\u5728\u7684\u770b\u6cd5"
+  $later = U "\u4ee5\u540e\u518d\u770b"
+  $bodyContent = @"
+$intro
+
+## $cause
+
+
+## $bodyTitle
+
+
+## $view
+
+
+## $later
+
+
+"@
+}
 
 $body = @"
 ---
@@ -99,17 +163,7 @@ tags: [$tagsLine]
 description: $(Convert-ToYamlSingleQuoted $Description)
 ---
 
-$intro
-
-## $cause
-
-
-## $bodyTitle
-
-
-## $summary
-
-
+$bodyContent
 "@
 
 New-Item -ItemType Directory -Force -Path $targetDirectory | Out-Null

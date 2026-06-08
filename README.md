@@ -52,6 +52,12 @@ description: "一句话说明这篇文章主要写什么。"
 
 `-Category` 可以填 `essay`、`learning`、`life`，会分别生成 `随笔`、`学习`、`生活`。
 
+教程类文章可以加 `-Kind tutorial`，脚本会生成更适合教程的结构：
+
+```powershell
+.\scripts\new-post.ps1 -Title "清理 C 盘可以从哪里开始" -Slug clean-c-drive -Category learning -Kind tutorial -Tags "教程,Windows,C盘清理" -Draft
+```
+
 当前草稿：
 
 - `_drafts/clean-c-drive.md`: 清理 C 盘教程草稿
