@@ -114,6 +114,12 @@ _posts/2026-06-07-clean-c-drive.md
 - 教程类文章是否写清楚适用场景、步骤和风险
 - 不确定能否删除/修改的系统文件，不要写成绝对建议
 
+可以先运行脚本做基础元数据检查：
+
+```powershell
+.\scripts\check-posts.ps1
+```
+
 ## 本地构建
 
 需要先安装 Ruby 和 Bundler。
