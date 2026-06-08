@@ -46,6 +46,15 @@ Windows 下也可以用：
 .\scripts\serve.ps1 -Port 4001
 ```
 
+## 脚本清单
+
+- `scripts/new-post.ps1`: 生成随笔或教程草稿
+- `scripts/publish-draft.ps1`: 从 `_drafts/` 复制草稿到 `_posts/`
+- `scripts/check-posts.ps1`: 检查文章 Front Matter、分类、日期和文件名
+- `scripts/check-links.ps1`: 检查 Markdown 里的本地链接是否存在
+- `scripts/check-all.ps1`: 运行发布前基础检查
+- `scripts/serve.ps1`: 在 Windows 下启动本地预览
+
 ## 写文章
 
 文章放在 `_posts/` 目录，文件名格式：
