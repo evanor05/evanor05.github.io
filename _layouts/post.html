@@ -27,6 +27,9 @@ layout: default
         {% endfor %}
       {%- endif -%}
     </p>
+    {%- if page.description -%}
+      <p class="post-description" itemprop="description">{{ page.description | escape }}</p>
+    {%- endif -%}
 
   </header>
 

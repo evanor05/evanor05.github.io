@@ -58,6 +58,15 @@
   content: "\25EF";
 }
 
+.post-description {
+  max-width: 42rem;
+  margin: 0.75rem auto 0;
+  font-family: $headline-font-family;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  opacity: 0.82;
+}
+
 .category-guide {
   display: grid;
   gap: 0.75rem;
