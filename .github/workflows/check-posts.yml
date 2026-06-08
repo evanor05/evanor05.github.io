@@ -17,6 +17,10 @@ jobs:
         shell: pwsh
         run: ./scripts/check-posts.ps1
 
+      - name: Check local markdown links
+        shell: pwsh
+        run: ./scripts/check-links.ps1
+
   build-site:
     runs-on: ubuntu-latest
     steps:

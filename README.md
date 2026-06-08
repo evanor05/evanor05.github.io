@@ -160,6 +160,8 @@ _posts/2026-06-07-clean-c-drive.md
 .\scripts\check-all.ps1
 ```
 
+其中会包含文章元数据检查和 Markdown 本地链接检查。
+
 如果本机已经安装 Ruby 和 Bundler，也可以顺手检查 Jekyll 构建：
 
 ```powershell

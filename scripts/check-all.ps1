@@ -20,6 +20,10 @@ Invoke-Step "Check post metadata" {
   powershell.exe -ExecutionPolicy Bypass -File .\scripts\check-posts.ps1
 }
 
+Invoke-Step "Check local markdown links" {
+  powershell.exe -ExecutionPolicy Bypass -File .\scripts\check-links.ps1
+}
+
 Invoke-Step "Check git whitespace" {
   git diff --check
 }
