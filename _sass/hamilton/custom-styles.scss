@@ -58,6 +58,22 @@
   content: "\25EF";
 }
 
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1000;
+  transform: translateY(-150%);
+  padding: 0.45rem 0.7rem;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 .site-sidebar-button {
   border: 0;
   background: transparent;
