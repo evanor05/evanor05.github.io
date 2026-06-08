@@ -35,8 +35,8 @@
         {%- for nav in site.data.navigation -%}
           {%- if nav.title -%}
             {% if nav.sublinks %}
-              <li class="dropdown" href="#">
-                <a href="javascript:void(0)" class="dropbtn">{{ nav.title | escape }}</a>
+              <li class="dropdown">
+                <button type="button" class="dropbtn" aria-haspopup="true">{{ nav.title | escape }}</button>
                 <div class="dropdown-content">
                   {%- for link in nav.sublinks %}
                     <a class="{% if page.url == link.url %}current-page{% endif %}" href="{{ link.url | relative_url }}">{{ link.title | escape }}</a>
