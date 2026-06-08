@@ -54,13 +54,28 @@ function Parse-ListValue {
   return [string[]]@($trimmed.Trim('"').Trim("'"))
 }
 
-$allowedCategories = @(
-  "$([char]0x968f)$([char]0x7b14)"
-  "$([char]0x5b66)$([char]0x4e60)"
-  "$([char]0x751f)$([char]0x6d3b)"
-)
+function Get-AllowedCategories {
+  $categoryPath = Join-Path "_data" "categories.yml"
+  if (-not (Test-Path -LiteralPath $categoryPath)) {
+    throw "Category data file does not exist: $categoryPath"
+  }
+
+  $content = [System.IO.File]::ReadAllText((Resolve-Path $categoryPath).Path, [System.Text.Encoding]::UTF8)
+  [string[]]$categories = [System.Text.RegularExpressions.Regex]::Matches($content, "(?m)^\s*-\s*name:\s*(.+?)\s*$") | ForEach-Object {
+    $_.Groups[1].Value.Trim().Trim('"').Trim("'")
+  } | Where-Object { $_ }
+
+  if ($categories.Count -eq 0) {
+    throw "No categories found in $categoryPath"
+  }
+
+  return $categories
+}
+
+$allowedCategories = @(Get-AllowedCategories)
 
 $issues = [System.Collections.Generic.List[object]]::new()
+$checkedCount = 0
 $paths = @()
 if (Test-Path "_posts") {
   $paths += @(Get-ChildItem -Path "_posts" -Filter "*.md" -File)
@@ -73,6 +88,7 @@ foreach ($file in $paths) {
   if (-not $IncludeTemplates -and $file.Name -like "*-template.md") {
     continue
   }
+  $checkedCount++
 
   $relativePath = Resolve-Path -Relative $file.FullName
   $content = [System.IO.File]::ReadAllText($file.FullName, [System.Text.Encoding]::UTF8)
@@ -132,4 +148,4 @@ if ($issues.Count -gt 0) {
   exit 1
 }
 
-Write-Output "Checked $($paths.Count) markdown files. No post metadata issues found."
+Write-Output "Checked $checkedCount markdown files. No post metadata issues found."
