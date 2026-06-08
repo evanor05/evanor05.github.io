@@ -68,9 +68,9 @@ layout: default
       </div>
     {% endif %}
 
-    <nav class="post-pagination" role="navigation">
+    <nav class="post-pagination" role="navigation" aria-label="文章导航">
       {% if page.previous %}
-        <a class="post-previous" href="{{ page.previous.url | relative_url }}">
+        <a class="post-previous" href="{{ page.previous.url | relative_url }}" rel="prev">
           <h4 class="post-pagination-label">上一篇</h4>
           <span class="post-pagination-title">
             <i class="fas fa-arrow-left" aria-hidden="true"></i> {{ page.previous.title | markdownify | strip_html }}
@@ -79,7 +79,7 @@ layout: default
       {% endif %}
 
       {% if page.next %}
-        <a class="post-next" href="{{ page.next.url | relative_url }}">
+        <a class="post-next" href="{{ page.next.url | relative_url }}" rel="next">
           <h4 class="post-pagination-label">下一篇</h4>
           <span class="post-pagination-title">
             {{ page.next.title | markdownify | strip_html }} <i class="fas fa-arrow-right" aria-hidden="true"></i>
