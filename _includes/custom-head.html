@@ -1,4 +1,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/images/favicon-32.png' | relative_url }}">
 <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/images/apple-touch-icon.png' | relative_url }}">
 <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
+{% if page.robots %}
+<meta name="robots" content="{{ page.robots | escape }}">
+{% endif %}
 <meta name="theme-color" content="#f8f8f8">
