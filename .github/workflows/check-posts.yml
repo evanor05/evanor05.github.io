@@ -1,0 +1,18 @@
+name: Check posts
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  check-posts:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check post metadata
+        shell: pwsh
+        run: ./scripts/check-posts.ps1
