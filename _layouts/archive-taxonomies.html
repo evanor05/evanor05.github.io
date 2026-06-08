@@ -12,6 +12,13 @@ layout: page
 {%- else -%}
   {%- assign taxonomies = none -%}
 {%- endif -%}
+{%- if page.type == 'categories' -%}
+  {%- assign taxonomy_nav_label = '分类目录' -%}
+{%- elsif page.type == 'tags' -%}
+  {%- assign taxonomy_nav_label = '标签目录' -%}
+{%- else -%}
+  {%- assign taxonomy_nav_label = '目录' -%}
+{%- endif -%}
 
 {% comment %} Calculate the max count of taxonomies {% endcomment %}
 {%- assign max_count = 0 -%}
@@ -22,7 +29,7 @@ layout: page
   {%- endif -%}
 {%- endfor -%}
 
-<div class="taxonomies-wrapper">
+<nav class="taxonomies-wrapper" aria-label="{{ taxonomy_nav_label }}">
   <ul class="taxonomies">
     {%- for i in (1..max_count) reversed -%}
       {%- for taxonomy in taxonomies -%}
@@ -43,7 +50,7 @@ layout: page
       {%- endfor -%}
     {%- endfor -%}
   </ul>
-</div>
+</nav>
 
 {% comment %} Show posts by taxonomy {% endcomment %}
 {%- for i in (1..max_count) reversed -%}
@@ -55,14 +62,14 @@ layout: page
       <h2 id="{{ slugified_taxonomy_name }}">
         {{ taxonomy_name }}
       </h2>
-      <ul class="post-list-by-taxonomy">
+      <ul class="post-list-by-taxonomy" aria-label="{{ taxonomy_name }} 下的文章">
         {%- for post in posts -%}
           <li>
             <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time> &raquo; <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
           </li>
         {%- endfor -%}
       </ul>
-      <a href="#site-main" class="back-to-top">返回顶部 &#8648;</a>
+      <a href="#site-main" class="back-to-top" aria-label="返回顶部">返回顶部 &#8648;</a>
     {%- endif -%}
   {%- endfor -%}
 {%- endfor -%}

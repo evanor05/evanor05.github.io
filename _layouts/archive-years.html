@@ -6,7 +6,7 @@ layout: page
 
 {%- assign taxonomies = site.posts | group_by_exp: "post", "post.date | date: '%Y'" -%}
 
-<div class="taxonomies-wrapper">
+<nav class="taxonomies-wrapper" aria-label="年份目录">
   <ul class="taxonomies">
     {%- for taxonomy in taxonomies -%}
       <li>
@@ -18,14 +18,14 @@ layout: page
       </li>
     {%- endfor -%}
   </ul>
-</div>
+</nav>
 
 {% comment %} Show posts by taxonomy {% endcomment %}
 {%- for taxonomy in taxonomies -%}
   <h2 id="{{ taxonomy.name }}">
     {{ taxonomy.name }}
   </h2>
-  <ul class="post-list-by-taxonomy">
+  <ul class="post-list-by-taxonomy" aria-label="{{ taxonomy.name }} 年文章">
     {%- assign posts = taxonomy.items -%}
     {%- for post in posts -%}
       <li>
@@ -33,5 +33,5 @@ layout: page
       </li>
     {%- endfor -%}
   </ul>
-  <a href="#site-main" class="back-to-top">返回顶部 &#8648;</a>
+  <a href="#site-main" class="back-to-top" aria-label="返回顶部">返回顶部 &#8648;</a>
 {%- endfor -%}

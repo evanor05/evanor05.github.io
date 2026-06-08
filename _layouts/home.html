@@ -48,7 +48,7 @@ layout: default
     </ul>
 
     {% if site.paginate %}
-      <div class="pager">
+      <nav class="pager" aria-label="分页">
         <ul class="pagination">
         {%- if paginator.previous_page %}
           <li><a href="{{ paginator.previous_page_path | relative_url }}" class="previous-page">{{ paginator.previous_page }}</a></li>
@@ -62,7 +62,7 @@ layout: default
           <li><div class="pager-edge">•</div></li>
         {%- endif %}
         </ul>
-      </div>
+      </nav>
     {%- endif %}
 
   {%- endif -%}
