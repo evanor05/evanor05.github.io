@@ -89,6 +89,18 @@ _drafts/clean-c-drive.md
 _posts/2026-06-07-clean-c-drive.md
 ```
 
+也可以用脚本发布草稿。脚本会复制草稿到 `_posts/`，自动更新 `date`，并且不会删除原草稿：
+
+```powershell
+.\scripts\publish-draft.ps1 -Draft clean-c-drive -Slug clean-c-drive
+```
+
+如果要指定发布日期：
+
+```powershell
+.\scripts\publish-draft.ps1 -Draft clean-c-drive -Slug clean-c-drive -Date "2026-06-08 20:00:00"
+```
+
 ## 发布前检查
 
 发布文章前至少检查这些点：
