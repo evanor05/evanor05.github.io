@@ -13,19 +13,19 @@
   <ul class="contact-list">
     {% if site.author -%}
       <li>
-        <i class="sidebar-icon fas fa-at"></i>
+        <i class="sidebar-icon fas fa-at" aria-hidden="true"></i>
         <span class="contact-info p-name">{{ site.author | escape }}</span>
       </li>
     {%- endif %}
     {% if site.email -%}
       <li>
-        <i class="sidebar-icon fas fa-envelope"></i>
+        <i class="sidebar-icon fas fa-envelope" aria-hidden="true"></i>
         <a class="contact-info u-email" href="mailto:{{ site.email }}">{{ site.email }}</a>
       </li>
     {%- endif %}
     {% if site.location -%}
       <li>
-        <i class="sidebar-icon fas fa-location-arrow"></i>
+        <i class="sidebar-icon fas fa-location-arrow" aria-hidden="true"></i>
         <a class="contact-info u-location" href="https://www.google.com/maps/search/{{ site.location | url_encode }}" target="_blank" rel="noopener noreferrer">{{ site.location }}</a>
       </li>
     {%- endif %}
@@ -35,7 +35,7 @@
 {% if site.subscribe != false -%}
 <div class="sidebar-section feed-subscribe">
   <a href="{{ 'feed.xml' | relative_url }}">
-    <i class="sidebar-icon fas fa-rss"></i><span>订阅</span>
+    <i class="sidebar-icon fas fa-rss" aria-hidden="true"></i><span>订阅</span>
   </a>
 </div>
 {%- endif %}
@@ -46,7 +46,7 @@
       {% for social in site.data.social -%}
         <li>
           <a class="social-icon" href="{{ social.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ social.title | escape }}">
-            <i class="{{ social.icon | default: 'fas fa-link' }} fa-2x" title="{{ social.title | escape }}"></i>
+            <i class="{{ social.icon | default: 'fas fa-link' }} fa-2x" title="{{ social.title | escape }}" aria-hidden="true"></i>
           </a>
         </li>
       {%- endfor %}

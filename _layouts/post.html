@@ -40,7 +40,7 @@ layout: default
   <footer class="post-footer">
     {% if page.categories.size > 0 %}
       <div class="post-meta">
-        <i class="fas fa-folder"></i>
+        <i class="fas fa-folder" aria-hidden="true"></i>
         <ul class="post-taxonomies post-categories">
           {% assign categories = page.categories | sort %}
           {% for category in categories %}
@@ -55,7 +55,7 @@ layout: default
 
     {% if page.tags.size > 0 %}
       <div class="post-meta">
-        <i class="fas fa-tags"></i>
+        <i class="fas fa-tags" aria-hidden="true"></i>
         <ul class="post-taxonomies post-tags">
           {% assign tags = page.tags | sort %}
           {% for tag in tags %}
@@ -73,7 +73,7 @@ layout: default
         <a class="post-previous" href="{{ page.previous.url | relative_url }}">
           <h4 class="post-pagination-label">上一篇</h4>
           <span class="post-pagination-title">
-            <i class="fas fa-arrow-left"></i> {{ page.previous.title | markdownify | strip_html }}
+            <i class="fas fa-arrow-left" aria-hidden="true"></i> {{ page.previous.title | markdownify | strip_html }}
           </span>
         </a>
       {% endif %}
@@ -82,7 +82,7 @@ layout: default
         <a class="post-next" href="{{ page.next.url | relative_url }}">
           <h4 class="post-pagination-label">下一篇</h4>
           <span class="post-pagination-title">
-            {{ page.next.title | markdownify | strip_html }} <i class="fas fa-arrow-right"></i>
+            {{ page.next.title | markdownify | strip_html }} <i class="fas fa-arrow-right" aria-hidden="true"></i>
           </span>
         </a>
       {% endif %}
