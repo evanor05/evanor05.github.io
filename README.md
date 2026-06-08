@@ -2,6 +2,38 @@
 
 这是一个基于 Jekyll 和 Hamilton 主题的个人博客，主要写随笔、学习记录和一些平时用得上的教程。
 
+## 常用命令
+
+新建随笔草稿：
+
+```powershell
+.\scripts\new-post.ps1 -Title "文章标题" -Slug article-slug -Category essay -Tags "生活" -Draft
+```
+
+新建教程草稿：
+
+```powershell
+.\scripts\new-post.ps1 -Title "教程标题" -Slug tutorial-slug -Category learning -Kind tutorial -Tags "教程,工具" -Draft
+```
+
+发布草稿：
+
+```powershell
+.\scripts\publish-draft.ps1 -Draft draft-slug -Slug post-slug
+```
+
+发布前检查：
+
+```powershell
+.\scripts\check-all.ps1
+```
+
+预览站点：
+
+```bash
+bundle exec jekyll serve --drafts
+```
+
 ## 写文章
 
 文章放在 `_posts/` 目录，文件名格式：
