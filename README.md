@@ -196,7 +196,7 @@ _posts/2026-06-07-clean-c-drive.md
 ```bash
 bundle install
 bundle lock --add-platform x86_64-linux
-bundle exec jekyll serve
+bundle exec jekyll serve --drafts
 ```
 
 Ruby 版本以 `.ruby-version` 为准。
