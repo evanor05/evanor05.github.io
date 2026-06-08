@@ -138,8 +138,17 @@ foreach ($file in $paths) {
     }
   }
 
-  if ($file.Directory.Name -eq "_posts" -and $file.Name -notmatch "^\d{4}-\d{2}-\d{2}-[a-z0-9][a-z0-9\-_]*\.md$") {
-    Add-Issue $relativePath "post filename should be YYYY-MM-DD-slug.md."
+  if ($file.Directory.Name -eq "_posts") {
+    $fileNameMatch = [System.Text.RegularExpressions.Regex]::Match($file.Name, "^(\d{4}-\d{2}-\d{2})-[a-z0-9][a-z0-9\-_]*\.md$")
+    if (-not $fileNameMatch.Success) {
+      Add-Issue $relativePath "post filename should be YYYY-MM-DD-slug.md."
+    } elseif ($date -match "^(\d{4}-\d{2}-\d{2})\s+") {
+      $frontMatterDate = $Matches[1]
+      $fileNameDate = $fileNameMatch.Groups[1].Value
+      if ($fileNameDate -ne $frontMatterDate) {
+        Add-Issue $relativePath "filename date $fileNameDate does not match front matter date $frontMatterDate."
+      }
+    }
   }
 }
 

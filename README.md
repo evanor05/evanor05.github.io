@@ -120,7 +120,7 @@ _posts/2026-06-07-clean-c-drive.md
 .\scripts\check-posts.ps1
 ```
 
-检查脚本会读取 `_data/categories.yml` 作为合法分类来源。
+检查脚本会读取 `_data/categories.yml` 作为合法分类来源，并确认正式文章文件名日期和 Front Matter 里的 `date` 一致。
 
 ## 本地构建
 
