@@ -2,6 +2,8 @@
 
 这个博客是 Jekyll 静态站点，源码保存在 GitHub 仓库中。
 
+Ruby 版本以仓库根目录的 `.ruby-version` 为准。
+
 ## Vercel
 
 导入仓库后使用以下配置：

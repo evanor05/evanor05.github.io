@@ -190,6 +190,8 @@ bundle lock --add-platform x86_64-linux
 bundle exec jekyll serve
 ```
 
+Ruby 版本以 `.ruby-version` 为准。
+
 ## 部署
 
 Vercel 和 GitHub Pages 的部署说明见 `DEPLOY.md`。
