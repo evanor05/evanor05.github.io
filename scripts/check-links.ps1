@@ -35,6 +35,12 @@ function Remove-FencedCodeBlocks {
   return [System.Text.RegularExpressions.Regex]::Replace($Content, '(?ms)^```.*?^```', "")
 }
 
+function Remove-InlineCode {
+  param([string]$Content)
+
+  return [System.Text.RegularExpressions.Regex]::Replace($Content, '(`+)(?:(?!\1).)*\1', "")
+}
+
 $issues = [System.Collections.Generic.List[object]]::new()
 $files = @()
 
@@ -56,6 +62,7 @@ $linkPattern = "!\[[^\]]*\]\(([^)\s]+)(?:\s+""[^""]*"")?\)|(?<!!)\[[^\]]+\]\(([^
 foreach ($file in $files) {
   $content = [System.IO.File]::ReadAllText($file.FullName, [System.Text.Encoding]::UTF8)
   $content = Remove-FencedCodeBlocks $content
+  $content = Remove-InlineCode $content
   $matches = [System.Text.RegularExpressions.Regex]::Matches($content, $linkPattern)
 
   foreach ($match in $matches) {
