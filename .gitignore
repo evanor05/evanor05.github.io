@@ -3,3 +3,7 @@
 .jekyll-cache
 .sass-cache
 _site
+
+# Local drafts may contain private, undone, or unpolished notes.
+_drafts/*.md
+!_drafts/*-template.md

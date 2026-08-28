@@ -1,8 +1,8 @@
 # 网站标题（显示在浏览器标签页）
-title: 先记下来
+title: 新手村
 
 # 网站描述（搜索引擎会抓取这句）
-description: 写随笔，也写一些平时用得上的教程和学习笔记。
+description: 记录技术学习、原理理解、个人思考，以及项目和工具使用中遇到的问题。
 
 # 你的名字
 author: David Lee
@@ -22,6 +22,12 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-paginate
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  math_engine: mathjax
 
 # 每页显示多少篇文章
 paginate: 10
@@ -58,7 +64,7 @@ twitter:
 logo: /assets/images/avatar-240.png
 
 social:
-  name: 先记下来
+  name: 新手村
   links:
     # 这里只留了你的 GitHub，原来的 facebook/twitter 都删了
     - https://github.com/evanor05

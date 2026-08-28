@@ -2,9 +2,35 @@
 
 这个博客是 Jekyll 静态站点，源码保存在 GitHub 仓库中。
 
-Ruby 版本以仓库根目录的 `.ruby-version` 为准。
+Ruby 版本以仓库根目录的 `.ruby-version` 为准，当前为 Ruby `3.1`。
+
+## GitHub Pages
+
+仓库名 `evanor05.github.io` 已经符合 GitHub Pages 用户站点要求。
+
+推荐设置：
+
+- Source: Deploy from a branch
+- Branch: `master`
+- Folder: `/root`
+
+发布流程：
+
+```powershell
+git add .
+git commit -m "Rework blog as technical notes"
+git push origin master
+```
+
+推送后访问：
+
+- `https://evanor05.github.io`
+
+如果 GitHub Pages 没有自动更新，到 GitHub 仓库的 `Settings -> Pages` 检查构建状态和分支设置。
 
 ## Vercel
+
+Vercel 可以作为 GitHub Pages 的备用访问入口。它会从 GitHub 仓库拉取源码，自动构建 Jekyll 静态站点并部署。
 
 导入仓库后使用以下配置：
 
@@ -23,24 +49,37 @@ bundle lock --add-platform x86_64-linux
 
 然后提交生成的 `Gemfile.lock`。
 
-## GitHub Pages
-
-如果继续使用 GitHub Pages，仓库名 `evanor05.github.io` 已经符合用户站点要求。
-
-在 GitHub 仓库中进入 `Settings` -> `Pages`：
-
-- Source: Deploy from a branch
-- Branch: `master`
-- Folder: `/root`
-
 ## 国内访问
 
-Vercel 和 GitHub Pages 都不是中国大陆境内托管，国内访问可能不稳定。长期稳定方案是：
+GitHub Pages 在中国大陆网络环境下经常不稳定，Vercel 也不是中国大陆境内托管，所以它只能作为相对方便的备用方案，不能保证长期稳定。
 
-1. 购买域名并完成 ICP 备案。
-2. 构建 Jekyll，生成 `_site`。
-3. 将 `_site` 上传到阿里云 OSS 或腾讯云 COS。
-4. 接入国内 CDN。
-5. 将 `_config.yml` 里的 `url` 改成正式域名。
+更客观的选择是分三层：
 
-当前站点已经去掉 Google Fonts 和 Font Awesome CDN 依赖，以减少国内访问时的外部阻塞请求。
+1. 先保留 GitHub Pages，作为最简单的默认部署。
+2. 再接入 Vercel，获得一个备用访问地址。
+3. 如果以后需要稳定面向国内访问，购买域名并完成 ICP 备案，把 Jekyll 构建产物 `_site` 上传到阿里云 OSS、腾讯云 COS 等国内对象存储，再接入国内 CDN。
+
+长期稳定国内访问通常绕不开域名备案和国内 CDN。没有备案时，可以先用 GitHub Pages + Vercel 过渡。
+
+## 本地构建
+
+安装 Ruby 和 Bundler 后：
+
+```bash
+bundle install
+bundle exec jekyll build
+```
+
+本地预览：
+
+```powershell
+.\scripts\serve.ps1
+```
+
+如果只是想做发布前基础检查：
+
+```powershell
+.\scripts\check-all.ps1
+```
+
+如果本机没有 Ruby/Bundler，`.\scripts\check-all.ps1 -Build` 会跳过构建；加 `-Strict` 可以让缺少 Ruby/Bundler 时直接失败。

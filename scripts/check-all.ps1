@@ -1,5 +1,6 @@
 param(
   [switch]$Build,
+  [switch]$IncludeDrafts,
   [switch]$Strict
 )
 
@@ -20,11 +21,19 @@ function Invoke-Step {
 }
 
 Invoke-Step "Check post metadata" {
-  powershell.exe -ExecutionPolicy Bypass -File .\scripts\check-posts.ps1
+  $arguments = @("-ExecutionPolicy", "Bypass", "-File", ".\scripts\check-posts.ps1")
+  if ($IncludeDrafts) {
+    $arguments += "-IncludeDrafts"
+  }
+  powershell.exe @arguments
 }
 
 Invoke-Step "Check local markdown links" {
-  powershell.exe -ExecutionPolicy Bypass -File .\scripts\check-links.ps1
+  $arguments = @("-ExecutionPolicy", "Bypass", "-File", ".\scripts\check-links.ps1")
+  if ($IncludeDrafts) {
+    $arguments += "-IncludeDrafts"
+  }
+  powershell.exe @arguments
 }
 
 Invoke-Step "Check git whitespace" {

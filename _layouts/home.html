@@ -65,6 +65,10 @@ layout: default
       </nav>
     {%- endif %}
 
+  {%- else -%}
+    <p class="empty-state">
+      还没有正式发布的技术笔记。可以先从 <code>_drafts/technical-note-template.md</code> 开始整理第一篇。
+    </p>
   {%- endif -%}
   
   {%- if jekyll.environment == "production" and site.disqus -%}

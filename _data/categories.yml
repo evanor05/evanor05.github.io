@@ -1,6 +1,12 @@
-- name: 随笔
-  description: 读书、想法、生活片段，以及暂时还没有明确结论的问题。
-- name: 学习
-  description: 课程、技术、编程、工具教程和问题解决记录。
-- name: 生活
-  description: 日常问题、电脑使用、软件配置和生活里的具体经验。
+- name: 控制理论
+  description: 自动控制原理、系统建模、稳定性分析、时域与频域方法等内容。
+- name: 计算机网络
+  description: 网络分层、协议机制、抓包分析、网络问题排查和相关实验记录。
+- name: Python
+  description: Python 语言、脚本工具、数据处理、工程实践和常见问题复盘。
+- name: 机器学习
+  description: 机器学习基础概念、模型原理、实验过程、公式理解和实践记录。
+- name: 算法
+  description: 数据结构、算法思想、题目复盘、复杂度分析和代码实现。
+- name: 工具与环境
+  description: 开发环境、系统工具、软件配置、效率工具和具体问题解决过程。

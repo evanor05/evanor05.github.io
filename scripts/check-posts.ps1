@@ -1,4 +1,5 @@
 param(
+  [switch]$IncludeDrafts,
   [switch]$IncludeTemplates
 )
 
@@ -80,7 +81,7 @@ $paths = @()
 if (Test-Path "_posts") {
   $paths += @(Get-ChildItem -Path "_posts" -Filter "*.md" -File)
 }
-if (Test-Path "_drafts") {
+if ($IncludeDrafts -and (Test-Path "_drafts")) {
   $paths += @(Get-ChildItem -Path "_drafts" -Filter "*.md" -File)
 }
 

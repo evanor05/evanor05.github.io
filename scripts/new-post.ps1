@@ -4,14 +4,14 @@ param(
 
   [string]$Slug,
 
-  [string]$Category = "essay",
+  [string]$Category = "tools",
 
   [string]$Tags = "",
 
   [string]$Description = "",
 
-  [ValidateSet("essay", "tutorial")]
-  [string]$Kind = "essay",
+  [ValidateSet("note", "tutorial", "project")]
+  [string]$Kind = "note",
 
   [switch]$Draft
 )
@@ -45,23 +45,34 @@ function Convert-ToYamlSingleQuoted {
 }
 
 $categoryMap = @{
-  essay = U "\u968f\u7b14"
-  learning = U "\u5b66\u4e60"
-  study = U "\u5b66\u4e60"
-  life = U "\u751f\u6d3b"
+  control = U "\u63a7\u5236\u7406\u8bba"
+  "control-theory" = U "\u63a7\u5236\u7406\u8bba"
+  network = U "\u8ba1\u7b97\u673a\u7f51\u7edc"
+  net = U "\u8ba1\u7b97\u673a\u7f51\u7edc"
+  python = "Python"
+  ml = U "\u673a\u5668\u5b66\u4e60"
+  "machine-learning" = U "\u673a\u5668\u5b66\u4e60"
+  algorithm = U "\u7b97\u6cd5"
+  algorithms = U "\u7b97\u6cd5"
+  algo = U "\u7b97\u6cd5"
+  tools = U "\u5de5\u5177\u4e0e\u73af\u5883"
+  tool = U "\u5de5\u5177\u4e0e\u73af\u5883"
+  env = U "\u5de5\u5177\u4e0e\u73af\u5883"
+  environment = U "\u5de5\u5177\u4e0e\u73af\u5883"
 }
 
 $categoryKey = $Category.Trim().ToLowerInvariant()
+$allowedCategories = @($categoryMap.Values | Select-Object -Unique)
 if ($categoryMap.ContainsKey($categoryKey)) {
   $categoryText = $categoryMap[$categoryKey]
-} elseif ($categoryMap.Values -contains $Category) {
+} elseif ($allowedCategories -contains $Category) {
   $categoryText = $Category
 } else {
-  throw "Invalid category. Use essay, learning, life, or the Chinese category names."
+  throw "Invalid category. Use control, network, python, ml, algorithm, tools, or a Chinese category name from _data/categories.yml."
 }
 
 if ([string]::IsNullOrWhiteSpace($Description)) {
-  $Description = U "\u4e00\u53e5\u8bdd\u8bf4\u660e\u8fd9\u7bc7\u6587\u7ae0\u4e3b\u8981\u5199\u4ec0\u4e48\u3002"
+  $Description = U "\u4e00\u53e5\u8bdd\u8bf4\u660e\u8fd9\u7bc7\u6587\u7ae0\u8981\u89e3\u91ca\u7684\u539f\u7406\u3001\u95ee\u9898\u6216\u5b9e\u8df5\u8bb0\u5f55\u3002"
 }
 
 $now = Get-Date
@@ -78,24 +89,33 @@ $tagList = @()
 if (-not [string]::IsNullOrWhiteSpace($Tags)) {
   $tagList = @($Tags.Split(",") | ForEach-Object { $_.Trim() } | Where-Object { $_ })
 }
-
-$categoryLine = Convert-ToYamlSingleQuoted $categoryText
-$tagsLine = if ($tagList.Count -gt 0) {
-  ($tagList | ForEach-Object { Convert-ToYamlSingleQuoted $_ }) -join ", "
-} else {
-  ""
+if ($tagList.Count -eq 0) {
+  if ($Kind -eq "tutorial") {
+    $tagList = @(U "\u95ee\u9898\u6392\u67e5")
+  } elseif ($Kind -eq "project") {
+    $tagList = @(U "\u9879\u76ee\u590d\u76d8")
+  } else {
+    $tagList = @((U "\u539f\u7406\u7406\u89e3"), (U "\u5b66\u4e60\u7b14\u8bb0"))
+  }
 }
 
+$categoryLine = Convert-ToYamlSingleQuoted $categoryText
+$tagsLine = ($tagList | ForEach-Object { Convert-ToYamlSingleQuoted $_ }) -join ", "
+
 $dateText = $now.ToString("yyyy-MM-dd HH:mm:ss +0800")
-$intro = U "\u5148\u5199\u4e00\u53e5\u8fd9\u7bc7\u6587\u7ae0\u8981\u89e3\u51b3\u7684\u95ee\u9898\uff0c\u6216\u6700\u60f3\u8bb0\u5f55\u7684\u60f3\u6cd5\u3002"
+$intro = U "\u5148\u5199\u4e00\u53e5\u8fd9\u7bc7\u6587\u7ae0\u8981\u89e3\u51b3\u7684\u95ee\u9898\uff0c\u6216\u6700\u60f3\u5f04\u660e\u767d\u7684\u70b9\u3002"
+$tocLine = "toc: true"
+$mathLine = if ($Kind -eq "note") { "`nmath: true" } else { "" }
 
 if ($Kind -eq "tutorial") {
   $scene = U "\u9002\u7528\u573a\u666f"
   $conclusion = U "\u5148\u8bf4\u7ed3\u8bba"
+  $basis = U "\u5224\u65ad\u4f9d\u636e"
   $preparation = U "\u51c6\u5907\u5de5\u4f5c"
   $steps = U "\u64cd\u4f5c\u6b65\u9aa4"
   $faq = U "\u5e38\u89c1\u95ee\u9898"
   $summary = U "\u603b\u7ed3"
+  $references = U "\u53c2\u8003\u8d44\u6599"
   $preparationItem = U "\u9700\u8981\u7684\u5de5\u5177\u6216\u51c6\u5907\u4e8b\u9879"
   $firstStep = U "\u7b2c\u4e00\u6b65"
   $secondStep = U "\u7b2c\u4e8c\u6b65"
@@ -107,6 +127,9 @@ $intro
 
 
 ## $conclusion
+
+
+## $basis
 
 
 ## $preparation
@@ -129,27 +152,75 @@ $intro
 ## $summary
 
 
+## $references
+
+- TODO
 "@
-} else {
-  $cause = U "\u8d77\u56e0"
-  $bodyTitle = U "\u60f3\u5230\u7684\u4e1c\u897f"
-  $view = U "\u73b0\u5728\u7684\u770b\u6cd5"
-  $later = U "\u4ee5\u540e\u518d\u770b"
+} elseif ($Kind -eq "project") {
+  $background = U "\u80cc\u666f\u4e0e\u76ee\u6807"
+  $design = U "\u65b9\u6848\u8bbe\u8ba1"
+  $implementation = U "\u5173\u952e\u5b9e\u73b0"
+  $problemSolving = U "\u95ee\u9898\u4e0e\u89e3\u51b3"
+  $review = U "\u590d\u76d8"
+  $references = U "\u53c2\u8003\u8d44\u6599"
   $bodyContent = @"
 $intro
 
-## $cause
+## $background
 
 
-## $bodyTitle
+## $design
 
 
-## $view
+## $implementation
 
 
-## $later
+## $problemSolving
 
 
+## $review
+
+
+## $references
+
+- TODO
+"@
+} else {
+  $background = U "\u95ee\u9898\u80cc\u666f"
+  $concept = U "\u6838\u5fc3\u6982\u5ff5"
+  $principle = U "\u539f\u7406\u68b3\u7406"
+  $understanding = U "\u6211\u7684\u7406\u89e3"
+  $example = U "\u4f8b\u5b50\u6216\u5b9e\u73b0"
+  $problems = U "\u9047\u5230\u7684\u95ee\u9898"
+  $summary = U "\u603b\u7ed3"
+  $references = U "\u53c2\u8003\u8d44\u6599"
+  $bodyContent = @"
+$intro
+
+## $background
+
+
+## $concept
+
+
+## $principle
+
+
+## $understanding
+
+
+## $example
+
+
+## $problems
+
+
+## $summary
+
+
+## $references
+
+- TODO
 "@
 }
 
@@ -161,6 +232,7 @@ date: $dateText
 categories: [$categoryLine]
 tags: [$tagsLine]
 description: $(Convert-ToYamlSingleQuoted $Description)
+$tocLine$mathLine
 ---
 
 $bodyContent

@@ -1,4 +1,5 @@
 param(
+  [switch]$IncludeDrafts,
   [string[]]$Paths = @()
 )
 
@@ -61,7 +62,7 @@ if ($Paths.Count -gt 0) {
   if (Test-Path "_posts") {
     $files += @(Get-ChildItem -Path "_posts" -Filter "*.md" -File -Recurse)
   }
-  if (Test-Path "_drafts") {
+  if ($IncludeDrafts -and (Test-Path "_drafts")) {
     $files += @(Get-ChildItem -Path "_drafts" -Filter "*.md" -File -Recurse)
   }
   $files += @(Get-ChildItem -Path "." -Filter "*.md" -File)
