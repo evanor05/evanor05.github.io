@@ -1,7 +1,18 @@
-// Prefer system fonts so the site remains fast and readable in mainland China
-// without depending on Google Fonts.
-$base-font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-$reading-font-family: Georgia, "Times New Roman", "Noto Serif SC", "Songti SC", SimSun, serif;
-$headline-font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-$code-font-family: Consolas, "Liberation Mono", Menlo, monospace;
-$handwriting-font-family: $headline-font-family;
+// Modern system font stacks
+$base-font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+$reading-font-family: $base-font-family;
+$headline-font-family: $base-font-family;
+$code-font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+$handwriting-font-family: $base-font-family;
+
+$text-color: #0f172a;
+$text-color-light: #64748b;
+$background-color: #ffffff;
+$code-background-color: #f8fafc;
+
+$border-color: #e2e8f0;
+$border-color-light: #f1f5f9;
+$border-color-dark: #cbd5e1;
+
+$link-base-color: #0f172a;
+$link-visited-color: #334155;

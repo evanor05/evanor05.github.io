@@ -2,89 +2,91 @@
 layout: default
 ---
 
-<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+<article class="post-view h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
-    <p class="post-meta">
-      {%- assign date_format = site.date_format | default: "%b %-d, %Y" -%}
+    <div class="post-meta">
+      {% assign date_format = site.date_format | default: "%Y-%m-%d" %}
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
         {{ page.date | date: date_format }}
       </time>
-      {%- if page.last_modified_at -%}
-        ~ 
-        {%- assign mdate = page.last_modified_at | date_to_xmlschema -%}
-        <time class="dt-modified" datetime="{{ mdate }}" itemprop="dateModified">
-          {{ mdate | date: date_format }}
-        </time>
-      {%- endif -%}
-      {%- if page.author -%}
-        • {% for author in page.author %}
-          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-            <span class="p-author h-card" itemprop="name">{{ author }}</span></span>
-            {%- if forloop.last == false %}, {% endif -%}
-        {% endfor %}
-      {%- endif -%}
-    </p>
-    {%- if page.description -%}
-      <p class="post-description" itemprop="description">{{ page.description | escape }}</p>
-    {%- endif -%}
 
+      {% if page.last_modified_at %}
+        <span class="meta-dot">·</span>
+        <span class="meta-modified">更新于 {{ page.last_modified_at | date: date_format }}</span>
+      {% endif %}
+
+      {% if page.categories.size > 0 %}
+        <span class="meta-dot">·</span>
+        <div class="post-categories-inline">
+          {% for category in page.categories %}
+            {% assign slugified_category = category | slugify: "raw" %}
+            <a class="post-cat-badge" href="{{ '/categories/#:category' | replace: ':category', slugified_category | relative_url }}">{{ category }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if page.description %}
+      <p class="post-description" itemprop="description">{{ page.description | escape }}</p>
+    {% endif %}
   </header>
+
+  {% if page.toc %}
+    <div class="post-toc-container">
+      <details class="post-toc-details" open>
+        <summary class="post-toc-summary">
+          <span class="toc-summary-icon">📑</span>
+          <span>文章目录 (TOC)</span>
+        </summary>
+        <div class="post-toc-body">
+          {% include toc.html html=content h_min=2 h_max=3 class="toc" %}
+        </div>
+      </details>
+    </div>
+  {% endif %}
 
   <div class="post-content e-content" itemprop="articleBody">
     {{ content }}
   </div>
 
   <footer class="post-footer">
-    {% if page.categories.size > 0 %}
-      <div class="post-meta">
-        <i class="fas fa-folder" aria-hidden="true"></i>
-        <ul class="post-taxonomies post-categories">
-          {% assign categories = page.categories | sort %}
-          {% for category in categories %}
-            <li class="post-category">
-              {% assign slugified_category = category | slugify: "raw" %}
-              {% assign category_anchor = slugified_category | append: '-posts' %}
-              <a href="{{ '/categories/#:category' | replace: ':category', category_anchor | relative_url }}">{{ category }}</a>
-            </li>
+    {% if page.tags.size > 0 %}
+      <div class="post-tags-area">
+        <span class="tags-label">标签：</span>
+        <ul class="post-tags-list">
+          {% for tag in page.tags %}
+            <li class="post-tag-item">#{{ tag }}</li>
           {% endfor %}
         </ul>
       </div>
     {% endif %}
 
-    {% if page.tags.size > 0 %}
-      <div class="post-meta">
-        <i class="fas fa-tags" aria-hidden="true"></i>
-        <ul class="post-taxonomies post-tags">
-          {% assign tags = page.tags | sort %}
-          {% for tag in tags %}
-            <li class="post-tag">
-              {% assign slugified_tag = tag | slugify: "raw" %}
-              <a href="{{ '/tags/#:tag' | replace: ':tag', slugified_tag | relative_url }}">{{ tag }}</a>
-            </li>
-          {% endfor %}
-        </ul>
+    <!-- Author Card -->
+    <div class="post-author-box">
+      <img class="post-author-avatar" src="{{ site.avatar | relative_url }}" alt="{{ site.author }}" width="48" height="48">
+      <div class="post-author-info">
+        <div class="post-author-name">
+          <span>{{ site.author }}</span>
+          <a class="post-author-gh" href="https://github.com/evanor05" target="_blank" rel="noopener noreferrer">@evanor05</a>
+        </div>
+        <p class="post-author-desc">专注自动控制原理、计算机网络机制与 Python 工程排查。从 Obsidian 整理沉淀。</p>
       </div>
-    {% endif %}
+    </div>
 
     <nav class="post-pagination" role="navigation" aria-label="文章导航">
       {% if page.previous %}
-        <a class="post-previous" href="{{ page.previous.url | relative_url }}" rel="prev">
-          <h4 class="post-pagination-label">上一篇</h4>
-          <span class="post-pagination-title">
-            <i class="fas fa-arrow-left" aria-hidden="true"></i> {{ page.previous.title | markdownify | strip_html }}
-          </span>
+        <a class="post-pagination-card prev-card" href="{{ page.previous.url | relative_url }}" rel="prev">
+          <span class="pagination-sub">← 上一篇</span>
+          <span class="pagination-title">{{ page.previous.title | markdownify | strip_html }}</span>
         </a>
       {% endif %}
 
       {% if page.next %}
-        <a class="post-next" href="{{ page.next.url | relative_url }}" rel="next">
-          <h4 class="post-pagination-label">下一篇</h4>
-          <span class="post-pagination-title">
-            {{ page.next.title | markdownify | strip_html }} <i class="fas fa-arrow-right" aria-hidden="true"></i>
-          </span>
+        <a class="post-pagination-card next-card" href="{{ page.next.url | relative_url }}" rel="next">
+          <span class="pagination-sub">下一篇 →</span>
+          <span class="pagination-title">{{ page.next.title | markdownify | strip_html }}</span>
         </a>
       {% endif %}
     </nav>

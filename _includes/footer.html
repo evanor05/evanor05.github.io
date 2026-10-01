@@ -1,22 +1,28 @@
-<div class="footer-col-wrapper">
-
-  <div class="footer-col">
-    <div class="copyright">
-      {% assign year_from = site.posts[-1].date | date: '%Y' %}
-      {% assign year_to   = site.time | date: '%Y' %}
-      {% if year_from == nil or year_from == year_to %}
-        {% assign year_string = year_from %}
-      {% else %}
-        {% assign year_string = year_from | append: '&nbsp;' | append: '-' | append: '&nbsp;' | append: year_to %}
-      {% endif %}
-      {% if site.author %}
-      <p>© {{ year_string }} {{ site.author }}. 保留所有权利。</p>
-      {% endif %}
+<div class="footer-container">
+  <div class="footer-top">
+    <div class="footer-brand-area">
+      <div class="footer-brand-title">
+        <span class="brand-name">{{ site.title | escape }}</span>
+        <span class="brand-separator">·</span>
+        <span class="brand-subtitle">个人技术笔记</span>
+      </div>
+      <p class="footer-description">{{ site.description | escape }}</p>
     </div>
-    <p>由 Jekyll 生成。</p>
+    <div class="footer-nav-area">
+      <div class="footer-nav-links">
+        <a href="{{ '/' | relative_url }}">首页</a>
+        <a href="{{ '/categories/' | relative_url }}">分类</a>
+        <a href="{{ '/years/' | relative_url }}">归档</a>
+        <a href="{{ '/about/' | relative_url }}">关于本站</a>
+        <a class="footer-gh-link" href="https://github.com/evanor05" target="_blank" rel="noopener noreferrer">
+          <img src="{{ '/assets/images/github-mark.svg' | relative_url }}" width="14" height="14" alt="" aria-hidden="true">
+          <span>GitHub</span>
+        </a>
+      </div>
+    </div>
   </div>
-
-  <div class="footer-col">
-    <p>{{ site.description | escape }}</p>
+  <div class="footer-bottom">
+    {% assign year_to = site.time | date: '%Y' %}
+    <p class="footer-copy">© {{ year_to }} {{ site.author | default: "David Lee" }}. 保留所有权利。基于 Jekyll 与 GitHub Pages 构建。</p>
   </div>
 </div>

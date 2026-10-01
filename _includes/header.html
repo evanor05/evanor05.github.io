@@ -1,84 +1,54 @@
-<div class="wrapper">
-  <script>
-    function toggleSidebar() {
-      const elem = document.getElementById("site-sidebar");
-      const button = document.querySelector(".site-sidebar-button");
-      if (elem.style.display == "none" || elem.style.display == "") {
-        elem.style.display = "block";
-        button.setAttribute("aria-expanded", "true");
-        button.setAttribute("aria-label", "关闭侧边栏");
-      } else {
-        elem.style.display = "none";
-        button.setAttribute("aria-expanded", "false");
-        button.setAttribute("aria-label", "打开侧边栏");
-      }
-    }
+<div class="header-container">
+  <a class="header-brand" href="{{ '/' | relative_url }}">
+    {% if site.avatar %}
+      <img class="header-avatar" src="{{ site.avatar | relative_url }}" width="30" height="30" alt="{{ site.title | escape }}" decoding="async">
+    {% endif %}
+    <span class="header-title">{{ site.title | escape }}</span>
+  </a>
 
-    document.addEventListener("DOMContentLoaded", function() {
-      const button = document.querySelector(".site-sidebar-button");
-      if (button) {
-        button.addEventListener("click", toggleSidebar);
-      }
-
-      const navTrigger = document.getElementById("nav-trigger");
-      const navButton = document.querySelector(".nav-menu-button");
-      if (navTrigger && navButton) {
-        const setNavigationMenuState = function(isExpanded) {
-          const label = isExpanded ? "关闭导航菜单" : "打开导航菜单";
-          navButton.setAttribute("aria-expanded", isExpanded ? "true" : "false");
-          navButton.setAttribute("aria-label", label);
-          navButton.setAttribute("title", label);
-        };
-
-        setNavigationMenuState(navTrigger.checked);
-        navTrigger.addEventListener("change", function() {
-          setNavigationMenuState(navTrigger.checked);
-        });
-        navButton.addEventListener("keydown", function(event) {
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            navTrigger.checked = !navTrigger.checked;
-            navTrigger.dispatchEvent(new Event("change", { bubbles: true }));
-          }
-        });
-      }
-    });
-  </script>
-  <button class="site-sidebar-button" type="button" aria-controls="site-sidebar" aria-expanded="false" aria-label="打开侧边栏">
-    <i class="far fa-user" aria-hidden="true"></i>
+  <button class="nav-toggle-btn" type="button" aria-expanded="false" aria-controls="header-nav-menu" aria-label="切换导航菜单">
+    <span class="nav-toggle-bar"></span>
+    <span class="nav-toggle-bar"></span>
+    <span class="nav-toggle-bar"></span>
   </button>
 
-  <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
-
-  {% if site.data.navigation %}
-    <nav class="site-nav" aria-label="主导航">
-      <input type="checkbox" id="nav-trigger" class="nav-trigger" aria-controls="site-navigation-menu" />
-      <label class="nav-menu-button" for="nav-trigger" role="button" tabindex="0" title="打开导航菜单" aria-label="打开导航菜单" aria-controls="site-navigation-menu" aria-expanded="false">
-        <span class="menu-icon">
-          <svg viewBox="0 0 18 15" width="18px" height="15px" aria-hidden="true" focusable="false">
-            <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+  <nav class="header-nav" id="header-nav-menu" aria-label="站点主导航">
+    <ul class="header-nav-list">
+      <li>
+        <a class="nav-link{% if page.url == '/' %} is-active{% endif %}" href="{{ '/' | relative_url }}">首页</a>
+      </li>
+      <li>
+        <a class="nav-link{% if page.url contains '/categories' %} is-active{% endif %}" href="{{ '/categories/' | relative_url }}">分类</a>
+      </li>
+      <li>
+        <a class="nav-link{% if page.url contains '/years' %} is-active{% endif %}" href="{{ '/years/' | relative_url }}">归档</a>
+      </li>
+      <li>
+        <a class="nav-link{% if page.url contains '/about' %} is-active{% endif %}" href="{{ '/about/' | relative_url }}">关于</a>
+      </li>
+      <li class="nav-item-gh">
+        <a class="header-gh-btn" href="https://github.com/evanor05" target="_blank" rel="noopener noreferrer" title="访问 evanor05 的 GitHub 主页">
+          <img src="{{ '/assets/images/github-mark.svg' | relative_url }}" width="16" height="16" alt="" aria-hidden="true">
+          <span>GitHub</span>
+          <svg class="external-icon" viewBox="0 0 12 12" width="10" height="10" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M3.5 2a.5.5 0 0 0 0 1h4.793L1.146 10.146a.5.5 0 0 0 .708.708L9 3.707V8.5a.5.5 0 0 0 1 0v-6a.5.5 0 0 0-.5-.5h-6z"/>
           </svg>
-        </span>
-      </label>
-
-      <ul class="trigger" id="site-navigation-menu">
-        {%- for nav in site.data.navigation -%}
-          {%- if nav.title -%}
-            {% if nav.sublinks %}
-              <li class="dropdown">
-                <button type="button" class="dropbtn" aria-haspopup="true">{{ nav.title | escape }}</button>
-                <div class="dropdown-content">
-                  {%- for link in nav.sublinks %}
-                    <a class="{% if page.url == link.url %}current-page{% endif %}" {% if page.url == link.url %}aria-current="page"{% endif %} href="{{ link.url | relative_url }}">{{ link.title | escape }}</a>
-                  {%- endfor %}
-                </div>
-              </li>
-            {% else %}
-              <li><a class="{% if page.url == nav.url %}current-page{% endif %}" {% if page.url == nav.url %}aria-current="page"{% endif %} href="{{ nav.url | relative_url }}">{{ nav.title | escape }}</a></li>
-            {% endif %}
-          {%- endif -%}
-        {%- endfor -%}
-      </ul>
-    </nav>
-  {% endif %}
+        </a>
+      </li>
+    </ul>
+  </nav>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var toggleBtn = document.querySelector(".nav-toggle-btn");
+    var navMenu = document.querySelector(".header-nav");
+    if (toggleBtn && navMenu) {
+      toggleBtn.addEventListener("click", function() {
+        var expanded = toggleBtn.getAttribute("aria-expanded") === "true";
+        toggleBtn.setAttribute("aria-expanded", String(!expanded));
+        navMenu.classList.toggle("is-open", !expanded);
+      });
+    }
+  });
+</script>

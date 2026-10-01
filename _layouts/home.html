@@ -2,122 +2,136 @@
 layout: default
 ---
 
-<div class="home">
+<div class="home-view">
+  <!-- Hero Section -->
+  <section class="hero-section" aria-labelledby="home-hero-title">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      <span class="badge-text">个人技术笔记 · 专注于原理与工程复盘</span>
+    </div>
+    <h1 class="hero-title" id="home-hero-title">{{ page.title | default: site.title | escape }}</h1>
+    <p class="hero-tagline">{{ page.subtitle | default: "原理梳理 · 代码实现 · 问题排查 · 实践复盘" | escape }}</p>
+    <p class="hero-desc">{{ page.description | default: site.description | escape }}</p>
 
-  <section class="home-hero" aria-labelledby="home-title">
-    <p class="home-eyebrow">个人技术笔记 <span aria-hidden="true">/</span> 学习与实践</p>
-    <h1 id="home-title">{{ page.title | default: site.title | escape }}</h1>
-    <p class="home-tagline">{{ page.subtitle | escape }}</p>
-    <p class="home-introduction">{{ page.description | default: site.description | escape }}</p>
-    <div class="home-actions">
-      <a class="home-github" href="https://github.com/evanor05" target="_blank" rel="noopener noreferrer">
-        <img src="{{ '/assets/images/github-mark.svg' | relative_url }}" width="20" height="20" alt="" aria-hidden="true">
-        <span>GitHub 主页</span>
-        <span class="home-external-mark" aria-hidden="true">↗</span>
+    <div class="hero-actions">
+      <a class="btn-gh-primary" href="https://github.com/evanor05" target="_blank" rel="noopener noreferrer">
+        <img class="btn-gh-icon" src="{{ '/assets/images/github-mark.svg' | relative_url }}" width="18" height="18" alt="" aria-hidden="true">
+        <span class="btn-gh-text">GitHub · @evanor05</span>
+        <svg class="btn-arrow-icon" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true">
+          <path fill="currentColor" d="M3.5 2a.5.5 0 0 0 0 1h4.793L1.146 10.146a.5.5 0 0 0 .708.708L9 3.707V8.5a.5.5 0 0 0 1 0v-6a.5.5 0 0 0-.5-.5h-6z"/>
+        </svg>
       </a>
-      <a class="home-about" href="{{ '/about/' | relative_url }}">关于本站 <span aria-hidden="true">→</span></a>
+      <a class="btn-about-secondary" href="{{ '/about/' | relative_url }}">
+        <span>了解博主与本站</span>
+        <span class="btn-arrow" aria-hidden="true">→</span>
+      </a>
     </div>
   </section>
 
-  <section class="home-topics" aria-labelledby="home-topics-title">
-    <div class="home-section-heading">
-      <div>
-        <p class="home-section-kicker">TOPICS</p>
-        <h2 id="home-topics-title">学习方向</h2>
+  <!-- Featured Categories / Topics -->
+  <section class="topics-section" aria-labelledby="topics-heading">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-kicker">KNOWLEDGE BASE</span>
+        <h2 class="section-title" id="topics-heading">学习方向与技术专栏</h2>
       </div>
-      <a class="home-section-link" href="{{ '/categories/' | relative_url }}">浏览全部分类 <span aria-hidden="true">→</span></a>
+      <a class="section-more-link" href="{{ '/categories/' | relative_url }}">
+        <span>浏览全部分类</span>
+        <span aria-hidden="true">→</span>
+      </a>
     </div>
-    <ul class="home-topic-list">
+
+    <div class="topic-grid">
       {% for category in site.data.categories %}
         {% assign category_slug = category.name | slugify: "raw" %}
-        <li>
-          <a class="home-topic-link" href="{{ '/categories/#:category' | replace: ':category', category_slug | relative_url }}">
-            <span class="home-topic-name">{{ category.name | escape }}</span>
-            <span class="home-topic-description">{{ category.description | escape }}</span>
-            <span class="home-topic-arrow" aria-hidden="true">↗</span>
-          </a>
-        </li>
+        <a class="topic-card" href="{{ '/categories/#:category' | replace: ':category', category_slug | relative_url }}">
+          <div class="topic-card-body">
+            <div class="topic-card-header">
+              <h3 class="topic-name">{{ category.name | escape }}</h3>
+              <span class="topic-arrow" aria-hidden="true">↗</span>
+            </div>
+            <p class="topic-desc">{{ category.description | escape }}</p>
+          </div>
+        </a>
       {% endfor %}
-    </ul>
+    </div>
   </section>
 
-  {% if site.paginate %}
-    {% assign posts = paginator.posts %}
-  {% else %}
-    {% assign posts = site.posts %}
-  {% endif %}
-
-  <section class="home-latest" aria-labelledby="home-latest-title">
-    <div class="home-section-heading">
-      <div>
-        <p class="home-section-kicker">LATEST NOTES</p>
-        <h2 id="home-latest-title">最近文章</h2>
+  <!-- Latest Posts -->
+  <section class="latest-section" aria-labelledby="latest-heading">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <span class="section-kicker">LATEST NOTES</span>
+        <h2 class="section-title" id="latest-heading">最新技术笔记</h2>
       </div>
     </div>
 
-    {%- if posts.size > 0 -%}
-      <ul class="post-list home-post-list">
-      {%- assign date_format = site.date_format | default: "%b %-d, %Y" -%}
-      {%- for post in posts -%}
-      <li>
-        <h2>
-          <a href="{{ post.url | relative_url }}">
-            {{ post.title | escape }}
-          </a>
-        </h2>
-        <p class="post-meta">
-          <time class="dt-published" datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
-            {{ post.date | date: date_format }}
-          </time>
-          {%- if post.categories.size > 0 -%}
-            <span class="post-meta-separator"> · </span>
-            {%- for category in post.categories -%}
-              {%- assign category_slug = category | slugify: "raw" -%}
-              {% assign category_anchor = category_slug | append: '-posts' %}
-              <a href="{{ '/categories/#:category' | replace: ':category', category_anchor | relative_url }}">{{ category }}</a>{% unless forloop.last %}, {% endunless %}
-            {%- endfor -%}
-          {%- endif -%}
-          {%- if jekyll.environment == "production" and site.disqus -%}
-            • <a href="{{ post.url | relative_url }}#disqus_thread">
-                <span class="disqus-comment-count" data-disqus-url="{{ post.url | absolute_url }}"></span>
-              </a>
-          {%- endif -%}
-        </p>
-        {%- if post.show_excerpts != false -%}
-          {%- assign excerpt_text = post.description | default: post.excerpt | strip_html | strip -%}
-          <div class="post-excerpt">{{ excerpt_text | truncate: 140 }}</div>
-        {%- endif -%}
-      </li>
-      {%- endfor -%}
+    {% if site.paginate %}
+      {% assign posts = paginator.posts %}
+    {% else %}
+      {% assign posts = site.posts %}
+    {% endif %}
+
+    {% if posts.size > 0 %}
+      <ul class="posts-list">
+        {% assign date_format = site.date_format | default: "%Y-%m-%d" %}
+        {% for post in posts %}
+          <li class="post-item">
+            <article class="post-card">
+              <div class="post-card-meta">
+                <time class="post-date" datetime="{{ post.date | date_to_xmlschema }}">
+                  {{ post.date | date: date_format }}
+                </time>
+                {% if post.categories.size > 0 %}
+                  <span class="meta-dot">·</span>
+                  <div class="post-category-tags">
+                    {% for cat in post.categories %}
+                      <span class="post-category-tag">{{ cat }}</span>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+              </div>
+              <h3 class="post-card-title">
+                <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+              </h3>
+              {% if post.description %}
+                <p class="post-card-desc">{{ post.description | escape }}</p>
+              {% endif %}
+            </article>
+          </li>
+        {% endfor %}
       </ul>
 
-    {% if site.paginate %}
-      <nav class="pager" aria-label="分页">
-        <ul class="pagination">
-        {%- if paginator.previous_page %}
-          <li><a href="{{ paginator.previous_page_path | relative_url }}" class="previous-page">{{ paginator.previous_page }}</a></li>
-        {%- else %}
-          <li><div class="pager-edge">•</div></li>
-        {%- endif %}
-          <li><div class="current-page" aria-current="page">{{ paginator.page }}</div></li>
-        {%- if paginator.next_page %}
-          <li><a href="{{ paginator.next_page_path | relative_url }}" class="next-page">{{ paginator.next_page }}</a></li>
-        {%- else %}
-          <li><div class="pager-edge">•</div></li>
-        {%- endif %}
-        </ul>
-      </nav>
-    {%- endif %}
+      {% if paginator.total_pages > 1 %}
+        <nav class="pagination-nav" aria-label="文章分页">
+          {% if paginator.previous_page %}
+            <a class="pagination-btn" href="{{ paginator.previous_page_path | relative_url }}">← 上一页</a>
+          {% endif %}
+          <span class="pagination-current">{{ paginator.page }} / {{ paginator.total_pages }}</span>
+          {% if paginator.next_page %}
+            <a class="pagination-btn" href="{{ paginator.next_page_path | relative_url }}">下一页 →</a>
+          {% endif %}
+        </nav>
+      {% endif %}
 
-    {%- else -%}
-      <div class="home-empty-state">
-        <p class="home-empty-title">第一篇文章正在整理中。</p>
-        <p>先从上面的主题目录看看这里将记录哪些内容。</p>
+    {% else %}
+      <div class="empty-state-card">
+        <div class="empty-state-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        </div>
+        <div class="empty-state-content">
+          <h3 class="empty-state-title">第一批精选技术笔记正在整理中</h3>
+          <p class="empty-state-text">
+            博主正在将 Obsidian 本地知识库中的笔记按统一模板进行系统梳理与脱敏，涵盖<strong>自动控制原理</strong>、<strong>计算机网络机制</strong>及 <strong>Python 工程工具复盘</strong>，即将同步发布。
+          </p>
+          <div class="empty-state-actions">
+            <a class="empty-action-link" href="{{ '/categories/' | relative_url }}">查看分类主题规划 →</a>
+            <a class="empty-action-link" href="{{ '/about/' | relative_url }}">了解关于与博主背景 →</a>
+          </div>
+        </div>
       </div>
-    {%- endif -%}
+    {% endif %}
   </section>
-  
-  {%- if jekyll.environment == "production" and site.disqus -%}
-    <script id="dsq-count-scr" src="//{{ site.disqus }}.disqus.com/count.js" async></script>
-  {%- endif -%}
 </div>

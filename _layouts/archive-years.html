@@ -2,36 +2,59 @@
 layout: page
 ---
 
-{{ content }}
+{% assign taxonomies = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
 
-{%- assign taxonomies = site.posts | group_by_exp: "post", "post.date | date: '%Y'" -%}
+{% if taxonomies.size > 0 %}
+  <nav class="archive-nav" aria-label="年份导航">
+    <div class="archive-year-pills">
+      {% for taxonomy in taxonomies %}
+        <a class="archive-year-pill" href="#year-{{ taxonomy.name }}">
+          <span>{{ taxonomy.name }}</span>
+          <span class="archive-count">{{ taxonomy.size }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </nav>
 
-<nav class="taxonomies-wrapper" aria-label="年份目录">
-  <ul class="taxonomies">
-    {%- for taxonomy in taxonomies -%}
-      <li>
-        {%- capture link -%}{{ page.permalink }}#{{ taxonomy.name }}{%- endcapture -%}
-        <a class="taxonomy" href="{{ link | relative_url }}">
-            <span>{{ taxonomy.name }}</span>
-            <span class="taxonomy-count">{{ taxonomy.size }}</span>
-        </a> 
-      </li>
-    {%- endfor -%}
-  </ul>
-</nav>
+  <div class="archive-timeline">
+    {% for taxonomy in taxonomies %}
+      <section class="archive-year-section" id="year-{{ taxonomy.name }}">
+        <h2 class="archive-year-title">{{ taxonomy.name }}</h2>
+        <ul class="archive-posts-list">
+          {% assign posts = taxonomy.items %}
+          {% for post in posts %}
+            <li class="archive-post-row">
+              <time class="archive-post-date" datetime="{{ post.date | date_to_xmlschema }}">
+                {{ post.date | date: "%m-%d" }}
+              </time>
+              <a class="archive-post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+              {% if post.categories.size > 0 %}
+                <span class="archive-post-cat">{{ post.categories | first }}</span>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endfor %}
+  </div>
 
-{% comment %} Show posts by taxonomy {% endcomment %}
-{%- for taxonomy in taxonomies -%}
-  <h2 id="{{ taxonomy.name }}">
-    {{ taxonomy.name }}
-  </h2>
-  <ul class="post-list-by-taxonomy" aria-label="{{ taxonomy.name }} 年文章">
-    {%- assign posts = taxonomy.items -%}
-    {%- for post in posts -%}
-      <li>
-        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time> &raquo; <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-      </li>
-    {%- endfor -%}
-  </ul>
-  <a href="#site-main" class="back-to-top" aria-label="返回顶部">返回顶部 &#8648;</a>
-{%- endfor -%}
+{% else %}
+  <div class="empty-state-card">
+    <div class="empty-state-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+      </svg>
+    </div>
+    <div class="empty-state-content">
+      <h3 class="empty-state-title">时间线正在初始化</h3>
+      <p class="empty-state-text">
+        当前暂无历史发布的公开文章。博主在 Obsidian 中整理好首篇技术笔记后，将在此自动生成按年份归档的时间轴。
+      </p>
+      <div class="empty-state-actions">
+        <a class="empty-action-link" href="{{ '/' | relative_url }}">返回首页 →</a>
+        <a class="empty-action-link" href="{{ '/categories/' | relative_url }}">查看分类方向 →</a>
+      </div>
+    </div>
+  </div>
+{% endif %}
