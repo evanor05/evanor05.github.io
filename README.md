@@ -1,8 +1,10 @@
 # 新手村
 
-这是一个基于 Jekyll 和 Hamilton 主题的学习笔记 / 技术笔记博客。
+[![GitHub](https://img.shields.io/badge/GitHub-evanor05-181717?logo=github)](https://github.com/evanor05)
 
-定位：从 Obsidian 中挑选值得公开的笔记，整理成完整文章后发布，用来记录技术学习、原理理解、个人思考，以及项目和工具使用中遇到的问题。
+基于 Jekyll + [Hamilton](https://github.com/ngzhio/jekyll-theme-hamilton) 主题的个人技术博客。
+
+从 Obsidian 笔记中挑选值得公开的内容，整理成完整文章发布，记录技术学习、原理理解、个人思考，以及项目和工具使用中遇到的问题。
 
 ## 内容方向
 

@@ -19,7 +19,6 @@ url: "https://evanor05.github.io"
 # 插件列表（保持默认即可）
 plugins:
   - jekyll-seo-tag
-  - jekyll-feed
   - jekyll-sitemap
   - jekyll-paginate
 
