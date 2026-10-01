@@ -4,9 +4,42 @@ layout: default
 
 <div class="home">
 
-  <p class="home-github"><a href="https://github.com/evanor05" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></p>
+  <section class="home-hero" aria-labelledby="home-title">
+    <p class="home-eyebrow">个人技术笔记 <span aria-hidden="true">/</span> 学习与实践</p>
+    <h1 id="home-title">{{ page.title | default: site.title | escape }}</h1>
+    <p class="home-tagline">{{ page.subtitle | escape }}</p>
+    <p class="home-introduction">{{ page.description | default: site.description | escape }}</p>
+    <div class="home-actions">
+      <a class="home-github" href="https://github.com/evanor05" target="_blank" rel="noopener noreferrer">
+        <img src="{{ '/assets/images/github-mark.svg' | relative_url }}" width="20" height="20" alt="" aria-hidden="true">
+        <span>GitHub 主页</span>
+        <span class="home-external-mark" aria-hidden="true">↗</span>
+      </a>
+      <a class="home-about" href="{{ '/about/' | relative_url }}">关于本站 <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
 
-  {{ content | markdownify }}
+  <section class="home-topics" aria-labelledby="home-topics-title">
+    <div class="home-section-heading">
+      <div>
+        <p class="home-section-kicker">TOPICS</p>
+        <h2 id="home-topics-title">学习方向</h2>
+      </div>
+      <a class="home-section-link" href="{{ '/categories/' | relative_url }}">浏览全部分类 <span aria-hidden="true">→</span></a>
+    </div>
+    <ul class="home-topic-list">
+      {% for category in site.data.categories %}
+        {% assign category_slug = category.name | slugify: "raw" %}
+        <li>
+          <a class="home-topic-link" href="{{ '/categories/#:category' | replace: ':category', category_slug | relative_url }}">
+            <span class="home-topic-name">{{ category.name | escape }}</span>
+            <span class="home-topic-description">{{ category.description | escape }}</span>
+            <span class="home-topic-arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
 
   {% if site.paginate %}
     {% assign posts = paginator.posts %}
@@ -14,8 +47,16 @@ layout: default
     {% assign posts = site.posts %}
   {% endif %}
 
-  {%- if posts.size > 0 -%}
-    <ul class="post-list">
+  <section class="home-latest" aria-labelledby="home-latest-title">
+    <div class="home-section-heading">
+      <div>
+        <p class="home-section-kicker">LATEST NOTES</p>
+        <h2 id="home-latest-title">最近文章</h2>
+      </div>
+    </div>
+
+    {%- if posts.size > 0 -%}
+      <ul class="post-list home-post-list">
       {%- assign date_format = site.date_format | default: "%b %-d, %Y" -%}
       {%- for post in posts -%}
       <li>
@@ -32,7 +73,8 @@ layout: default
             <span class="post-meta-separator"> · </span>
             {%- for category in post.categories -%}
               {%- assign category_slug = category | slugify: "raw" -%}
-              <a href="{{ '/categories/#:category' | replace: ':category', category_slug | relative_url }}">{{ category }}</a>{% unless forloop.last %}, {% endunless %}
+              {% assign category_anchor = category_slug | append: '-posts' %}
+              <a href="{{ '/categories/#:category' | replace: ':category', category_anchor | relative_url }}">{{ category }}</a>{% unless forloop.last %}, {% endunless %}
             {%- endfor -%}
           {%- endif -%}
           {%- if jekyll.environment == "production" and site.disqus -%}
@@ -47,7 +89,7 @@ layout: default
         {%- endif -%}
       </li>
       {%- endfor -%}
-    </ul>
+      </ul>
 
     {% if site.paginate %}
       <nav class="pager" aria-label="分页">
@@ -67,11 +109,13 @@ layout: default
       </nav>
     {%- endif %}
 
-  {%- else -%}
-    <p class="empty-state">
-      还没有正式发布的技术笔记。可以先从 <code>_drafts/technical-note-template.md</code> 开始整理第一篇。
-    </p>
-  {%- endif -%}
+    {%- else -%}
+      <div class="home-empty-state">
+        <p class="home-empty-title">第一篇文章正在整理中。</p>
+        <p>先从上面的主题目录看看这里将记录哪些内容。</p>
+      </div>
+    {%- endif -%}
+  </section>
   
   {%- if jekyll.environment == "production" and site.disqus -%}
     <script id="dsq-count-scr" src="//{{ site.disqus }}.disqus.com/count.js" async></script>

@@ -46,7 +46,8 @@ layout: default
           {% for category in categories %}
             <li class="post-category">
               {% assign slugified_category = category | slugify: "raw" %}
-              <a href="{{ '/categories/#:category' | replace: ':category', slugified_category | relative_url }}">{{ category }}</a>
+              {% assign category_anchor = slugified_category | append: '-posts' %}
+              <a href="{{ '/categories/#:category' | replace: ':category', category_anchor | relative_url }}">{{ category }}</a>
             </li>
           {% endfor %}
         </ul>

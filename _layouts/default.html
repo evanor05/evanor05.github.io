@@ -5,14 +5,14 @@
     {% include head.html %}
   </head>
 
-  <body>
+  <body{% if page.layout == 'home' %} class="home-page"{% endif %}>
     <a class="skip-link" href="#site-main">跳到正文</a>
     <div class="site-container">
       <header class="site-header">
         {% include header.html %}
       </header>
       
-      <div class="site-body wrapper">
+      <div class="site-body wrapper{% if page.layout == 'home' %} home-page-body{% endif %}">
         <aside class="site-sidebar" id="site-sidebar">
           {% if page.toc %}
             {% include sidebar-toc.html %}

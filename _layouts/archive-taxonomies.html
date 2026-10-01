@@ -59,7 +59,7 @@ layout: page
     {%- assign slugified_taxonomy_name = taxonomy_name | slugify: "raw" -%}
     {%- assign posts = taxonomy[1] -%}
     {%- if posts.size == i -%}
-      <h2 id="{{ slugified_taxonomy_name }}">
+      <h2 id="{% if page.type == 'categories' %}{{ slugified_taxonomy_name }}-posts{% else %}{{ slugified_taxonomy_name }}{% endif %}">
         {{ taxonomy_name }}
       </h2>
       <ul class="post-list-by-taxonomy" aria-label="{{ taxonomy_name }} 下的文章">
