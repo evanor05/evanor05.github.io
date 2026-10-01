@@ -36,4 +36,17 @@ jobs:
       - name: Build Jekyll site
         env:
           JEKYLL_ENV: production
-        run: bundle exec jekyll build
+        run: |
+          set -o pipefail
+          bundle exec jekyll build --trace 2>&1 | tee "$RUNNER_TEMP/jekyll-build.log"
+
+      - name: Add build error to run summary
+        if: failure()
+        run: |
+          {
+            echo '### Jekyll build error (last 80 lines)'
+            echo '```text'
+            tail -n 80 "$RUNNER_TEMP/jekyll-build.log" \
+              | sed -E 's/(token|password|secret)=([^[:space:]]+)/\1=[REDACTED]/Ig'
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
