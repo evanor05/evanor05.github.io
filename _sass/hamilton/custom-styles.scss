@@ -1328,3 +1328,79 @@ body {
   color: var(--text-main);
   line-height: 1.4;
 }
+
+/* 16. Tags Index Page */
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.tag-cloud-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.8rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-main) !important;
+  text-decoration: none !important;
+  transition: all 0.15s ease;
+}
+
+.tag-cloud-item:hover {
+  background-color: var(--text-main);
+  border-color: var(--text-main);
+  color: #ffffff !important;
+}
+
+.tag-cloud-count {
+  font-size: 0.72rem;
+  font-weight: 700;
+  opacity: 0.65;
+}
+
+.tag-sections {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.tag-section {
+  padding: 1.1rem 1.25rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--accent-blue) !important;
+  border-radius: var(--radius-md);
+  scroll-margin-top: 6rem;
+}
+
+.tag-section .category-guide-title {
+  font-size: 1.05rem !important;
+}
+
+.tag-section .category-post-row:first-child {
+  border-top: none;
+}
+
+/* Tag links inside an article footer */
+.post-tag-item a,
+.post-tag-item a:hover {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+.post-tag-item:hover {
+  background-color: var(--bg-badge);
+  color: var(--text-main);
+}
+
+@media screen and (max-width: 640px) {
+  .tag-sections {
+    grid-template-columns: 1fr;
+  }
+}

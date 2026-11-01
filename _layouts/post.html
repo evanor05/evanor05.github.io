@@ -57,7 +57,9 @@ layout: default
         <span class="tags-label">标签：</span>
         <ul class="post-tags-list">
           {% for tag in page.tags %}
-            <li class="post-tag-item">#{{ tag }}</li>
+            <li class="post-tag-item">
+              <a href="{{ '/tags/' | relative_url }}#tag-{{ tag | slugify: 'raw' }}">#{{ tag }}</a>
+            </li>
           {% endfor %}
         </ul>
       </div>
