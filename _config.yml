@@ -13,6 +13,9 @@ avatar: /assets/images/avatar-240.png
 # 你的邮箱
 email: daweili05@outlook.com
 
+# 所在城市（显示在侧边栏联系方式里）
+location: 江苏 无锡
+
 # 你的博客网址；部署到 Vercel 或自定义域名后再改成正式地址
 url: "https://evanor05.github.io"
 
@@ -42,11 +45,11 @@ date_format: "%Y-%m-%d"
 # disqus:
 
 # 构建时排除的文件（保持默认即可）
-# 注意：这里一旦覆盖，Jekyll 的默认排除项会失效，所以 Gemfile 等要手动列出。
 exclude:
   - scripts/
   - Gemfile
   - Gemfile.lock
+  - .build/
   - README.md
   - DEPLOY.md
   - LICENSE.txt
@@ -79,5 +82,4 @@ lang: zh-CN
 timezone: Asia/Shanghai
 
 # 固定主题皮肤，减少首屏额外 CSS 请求；可选 daylight/sunrise/sunset/midnight
-# 皮肤在构建时注入 assets/css/skin.css，修改后需要重新构建。
 skin: daylight

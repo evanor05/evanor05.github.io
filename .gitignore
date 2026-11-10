@@ -1,14 +1,14 @@
 *.gem
 .bundle
-.build/
 .jekyll-cache
 .sass-cache
 _site
 
+# Local toolchain (portable Ruby, vendor gems, npm/browser caches)
+.build/
+
+# Large local screenshot, not part of the published site
+IMG_4950.png
+
 # Local drafts may contain private, undone, or unpolished notes.
 _drafts/*.md
-!_drafts/*-template.md
-
-# Large local screenshots kept outside the published site.
-IMG_4950.png
-Gemfile.lock

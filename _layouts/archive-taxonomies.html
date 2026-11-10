@@ -2,108 +2,74 @@
 layout: page
 ---
 
-{% assign taxonomy_type = page.type | default: "categories" %}
-{% assign intro_text = content | strip %}
+{{ content }}
 
-{% if intro_text != "" %}
-  <div class="taxonomy-overview-intro">{{ content }}</div>
-{% endif %}
+{% comment %} Check the type of archive {% endcomment %}
+{%- if page.type == 'categories' -%}
+  {%- assign taxonomies = site.categories -%}
+{%- elsif page.type == 'tags' -%}
+  {%- assign taxonomies = site.tags -%}
+{%- else -%}
+  {%- assign taxonomies = none -%}
+{%- endif -%}
+{%- if page.type == 'categories' -%}
+  {%- assign taxonomy_nav_label = '分类目录' -%}
+{%- elsif page.type == 'tags' -%}
+  {%- assign taxonomy_nav_label = '标签目录' -%}
+{%- else -%}
+  {%- assign taxonomy_nav_label = '目录' -%}
+{%- endif -%}
 
-{% if taxonomy_type == "tags" %}
+{% comment %} Calculate the max count of taxonomies {% endcomment %}
+{%- assign max_count = 0 -%}
+{%- for taxonomy in taxonomies -%}
+  {%- assign posts = taxonomy[1] -%}
+  {%- if posts.size > max_count -%}
+    {%- assign max_count = posts.size -%}
+  {%- endif -%}
+{%- endfor -%}
 
-  {% if site.tags.size > 0 %}
-    <nav class="tag-cloud" aria-label="标签索引">
-      {% for tag in site.tags %}
-        {% assign tag_name = tag[0] %}
-        {% assign tag_posts = tag[1] %}
-        <a class="tag-cloud-item" href="#tag-{{ tag_name | slugify: 'raw' }}">
-          <span class="tag-cloud-name">#{{ tag_name }}</span>
-          <span class="tag-cloud-count">{{ tag_posts.size }}</span>
-        </a>
-      {% endfor %}
-    </nav>
+<nav class="taxonomies-wrapper" aria-label="{{ taxonomy_nav_label }}">
+  <ul class="taxonomies">
+    {%- for i in (1..max_count) reversed -%}
+      {%- for taxonomy in taxonomies -%}
+        {%- assign taxonomy_name = taxonomy[0] -%}
+        {%- assign slugified_taxonomy_name = taxonomy_name | slugify: "raw" -%}
+        {%- assign posts = taxonomy[1] -%}
+        {%- if posts.size == i -%}
+          <li>
+            {%- capture link -%}{{ page.permalink }}#{{ slugified_taxonomy_name }}{%- endcapture -%}
+            <a class="taxonomy" href="{{ link | relative_url }}">
+              <span>
+                {{ taxonomy_name }}
+              </span>
+              <span class="taxonomy-count">{{ posts.size }}</span>
+            </a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endfor -%}
+  </ul>
+</nav>
 
-    <div class="tag-sections">
-      {% for tag in site.tags %}
-        {% assign tag_name = tag[0] %}
-        {% assign tag_posts = tag[1] %}
-        <section class="tag-section" id="tag-{{ tag_name | slugify: 'raw' }}">
-          <div class="category-guide-header">
-            <h2 class="category-guide-title">#{{ tag_name }}</h2>
-            <span class="category-post-count">{{ tag_posts.size }} 篇</span>
-          </div>
-          <ul class="category-post-list">
-            {% for post in tag_posts %}
-              <li class="category-post-row">
-                <time class="category-post-time" datetime="{{ post.date | date_to_xmlschema }}">
-                  {{ post.date | date: "%Y-%m-%d" }}
-                </time>
-                <a class="category-post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-              </li>
-            {% endfor %}
-          </ul>
-        </section>
-      {% endfor %}
-    </div>
-  {% else %}
-    <div class="empty-state-card">
-      <div class="empty-state-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3z" />
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
-        </svg>
-      </div>
-      <div class="empty-state-content">
-        <h3 class="empty-state-title">标签还在收集中</h3>
-        <p class="empty-state-text">
-          标签由每篇文章的 Front Matter 自动汇总，只作为辅助检索，不作为主目录。首篇笔记发布后，这里会按使用频次列出所有标签。
-        </p>
-        <div class="empty-state-actions">
-          <a class="empty-action-link" href="{{ '/categories/' | relative_url }}">先看分类方向 →</a>
-          <a class="empty-action-link" href="{{ '/' | relative_url }}">返回首页 →</a>
-        </div>
-      </div>
-    </div>
-  {% endif %}
-
-{% else %}
-
-  <div class="category-guide">
-    {% for category in site.data.categories %}
-      {% assign category_slug = category.name | slugify: "raw" %}
-      {% assign cat_posts = site.categories[category.name] %}
-      <section class="category-guide-item" id="{{ category_slug }}">
-        <div class="category-guide-header">
-          <h2 class="category-guide-title">{{ category.name }}</h2>
-          <span class="category-post-count">
-            {% if cat_posts and cat_posts.size > 0 %}
-              {{ cat_posts.size }} 篇
-            {% else %}
-              筹备中
-            {% endif %}
-          </span>
-        </div>
-        <p class="category-guide-desc">{{ category.description }}</p>
-
-        {% if cat_posts and cat_posts.size > 0 %}
-          <ul class="category-post-list" id="{{ category_slug }}-posts">
-            {% for post in cat_posts %}
-              <li class="category-post-row">
-                <time class="category-post-time" datetime="{{ post.date | date_to_xmlschema }}">
-                  {{ post.date | date: "%Y-%m-%d" }}
-                </time>
-                <a class="category-post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          <div class="category-empty-hint">
-            <span class="hint-dot"></span>
-            <span>待发布精选笔记</span>
-          </div>
-        {% endif %}
-      </section>
-    {% endfor %}
-  </div>
-
-{% endif %}
+{% comment %} Show posts by taxonomy {% endcomment %}
+{%- for i in (1..max_count) reversed -%}
+  {%- for taxonomy in taxonomies -%}
+    {%- assign taxonomy_name = taxonomy[0] -%}
+    {%- assign slugified_taxonomy_name = taxonomy_name | slugify: "raw" -%}
+    {%- assign posts = taxonomy[1] -%}
+    {%- if posts.size == i -%}
+      <h2 id="{{ slugified_taxonomy_name }}">
+        {{ taxonomy_name }}
+      </h2>
+      <ul class="post-list-by-taxonomy" aria-label="{{ taxonomy_name }} 下的文章">
+        {%- for post in posts -%}
+          <li>
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time> &raquo; <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+          </li>
+        {%- endfor -%}
+      </ul>
+      <a href="#site-main" class="back-to-top" aria-label="返回顶部">返回顶部 &#8648;</a>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endfor -%}

@@ -101,12 +101,7 @@ toc: true
 
 `_drafts/*.md` 默认会被 Git 忽略，避免把本地草稿、undone 内容或 Obsidian 中未整理的笔记误提交到公开仓库。
 
-只有 `*-template.md` 这类公开模板会被跟踪。
-
-当前公开模板：
-
-- `_drafts/technical-note-template.md`: 技术笔记模板
-- `_drafts/tutorial-template.md`: 工具教程模板
+目前 `_drafts/` 下没有任何文件被跟踪；模板结构见上文的「文章结构」一节，新建草稿时由 `scripts/new-post.ps1` 自动生成。
 
 ## 常用命令
 

@@ -1,3 +1,6 @@
 - title: GitHub
   url: https://github.com/evanor05
   icon: fab fa-github
+- title: 邮件
+  url: mailto:daweili05@outlook.com
+  icon: fas fa-envelope

@@ -20,3 +20,20 @@ jobs:
       - name: Check local markdown links
         shell: pwsh
         run: ./scripts/check-links.ps1
+
+  build-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.1"
+          bundler-cache: true
+
+      - name: Build Jekyll site
+        env:
+          JEKYLL_ENV: production
+        run: bundle exec jekyll build

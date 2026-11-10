@@ -1,26 +1,32 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "zh-CN" }}">
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
 
   <head>
     {% include head.html %}
   </head>
 
-  <body class="site-body-root{% if page.layout == 'home' %} is-home{% endif %}">
+  <body>
     <a class="skip-link" href="#site-main">跳到正文</a>
-    <div class="site-shell">
+    <div class="site-container">
       <header class="site-header">
         {% include header.html %}
       </header>
-
-      <main class="site-main-content" id="site-main" aria-label="正文" tabindex="-1">
-        <div class="site-container">
+      
+      <div class="site-body wrapper">
+        <aside class="site-sidebar" id="site-sidebar">
+          {% if page.toc %}
+            {% include sidebar-toc.html %}
+          {% else %}
+            {% include sidebar.html %}
+          {% endif %}
+        </aside>
+        <main class="site-main" id="site-main" aria-label="正文" tabindex="-1">
           {{ content }}
-        </div>
-      </main>
-
-      <footer class="site-footer">
-        {% include footer.html %}
-      </footer>
+          <footer class="site-footer">
+            {% include footer.html %}
+          </footer>
+        </main>
+      </div>
     </div>
   </body>
 
